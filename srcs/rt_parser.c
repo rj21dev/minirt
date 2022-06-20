@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/20 17:40:48 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/20 17:55:29 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,30 @@ void	ft_check_extension(char *file)
 		ft_errors_handler(WRONG_EXTENSION);
 	if (strcmp(dot, ".rt"))
 		ft_errors_handler(WRONG_EXTENSION);
-	else
-		printf("Nice");
 }
 
-int	main(int argc, char __unused **argv)
+void	ft_init_scene(char *filename, t_scene __unused **scene)
 {
+	int	fd;
+
+	fd = open(filename, O_RDWR);
+	if (fd < 0)
+		ft_errors_handler(strerror(errno));
+	else
+		printf("Nice");
+	close(fd);
+}
+
+int	main(int argc, char **argv)
+{
+	t_scene	*scene;
+
 	if (argc != 2)
 		ft_errors_handler(ARGS_COUNT_FAILURE);
 	ft_check_extension(argv[1]);
+	scene = malloc(sizeof(t_scene));
+	if (!scene)
+		ft_errors_handler(strerror(errno));
+	ft_init_scene(argv[1], &scene);
 	return (0);
 }
