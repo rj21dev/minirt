@@ -3,7 +3,9 @@ SRCS_DIR	= srcs/
 OBJS_DIR	= objs/
 INCS_DIR	= includes
 
-SRCS_F		= rt_camera.c rt_figures.c rt_main.c rt_ray_trace.c rt_scene.c rt_sphere_intersect.c rt_utils.c rt_vector.c 
+# SRCS_F		= rt_camera.c rt_figures.c rt_main.c rt_ray_trace.c rt_scene.c rt_sphere_intersect.c rt_utils.c rt_vector.c 
+SRCS_F		= rt_parser.c \
+			rt_errors.c
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
 OBJS_F		= $(patsubst %.c, %.o, $(SRCS_F))
 DEPS_F		= $(patsubst %.c, %.d, $(SRCS_F))
@@ -12,7 +14,8 @@ DEPS		= $(addprefix $(OBJS_DIR), $(DEPS_F))
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -MMD
-LFLAGS		= -Llibft -L/usr/local/lib -lft -lmlx -lXext -lX11 -lm
+# LFLAGS		= -Llibft -L/usr/local/lib -lft -lmlx -lXext -lX11 -lm
+LFLAGS		= -Llibft -L/usr/local/lib -lft -lmlx -framework OpenGL -framework AppKit
 LIB			= libft.a
 LIB_DIR		= libft/
 
