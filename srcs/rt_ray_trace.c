@@ -6,13 +6,21 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 16:41:47 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/20 22:19:35 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	ray_traycing(void *mlx, void *window, t_scene *scene)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->len + x * (data->bpp / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	ray_traycing(t_data *data, t_scene *scene)
 {
 	int	mlx_x;
 	int	mlx_y;
@@ -35,13 +43,13 @@ void	ray_traycing(void *mlx, void *window, t_scene *scene)
 		while (x_angle <= scene->width / 2)
 		{
 			x_ray = x_angle * vplane->x_pixel;
-			ray = new_vector(x_ray, y_ray, -1);
+			ray = new_vector(x_ray, y_ray, 1);
 			vec_normalize(ray);
 			if (sphere_intersect(scene->cams, ray, scene->spheres))
 				color = 0xffff00;
 			else
 				color = 0x000000;
-			mlx_pixel_put(mlx, window, mlx_x, mlx_y, color);
+			my_mlx_pixel_put(data, mlx_x, mlx_y, color);
 			free(ray);
 			x_angle++;
 			mlx_x++;
@@ -49,6 +57,7 @@ void	ray_traycing(void *mlx, void *window, t_scene *scene)
 		y_angle--;
 		mlx_y++; 
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 }
 
 t_vplane	*get_view_plane(float width, float height, float fov)

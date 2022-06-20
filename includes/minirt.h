@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 16:42:19 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/20 22:26:15 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 # include "../libft/libft.h"
 # include <mlx.h>
 # include <math.h>
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		len;
+	int		endian;
+}	t_data;
 
 typedef struct	s_vector
 {
@@ -65,7 +76,7 @@ t_camera	*new_cam(t_vector *origin, t_vector *direction, float fov);
 t_sphere	*new_sphere(t_vector *center, float radius);
 t_scene	*new_scene(t_camera *cam, t_sphere *sphere);
 
-void	ray_traycing(void *mlx, void *window, t_scene *scene);
+void	ray_traycing(t_data *data, t_scene *scene);
 t_vplane	*get_view_plane(float width, float height, float fov);
 int	sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere);
 
