@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/20 17:55:29 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:12:19 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,19 @@ void	ft_check_extension(char *file)
 
 void	ft_init_scene(char *filename, t_scene __unused **scene)
 {
-	int	fd;
+	int		fd;
+	char	*line;
 
 	fd = open(filename, O_RDWR);
 	if (fd < 0)
 		ft_errors_handler(strerror(errno));
-	else
-		printf("Nice");
+	line = get_next_line(fd);
+	while (line)
+	{
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
 }
 

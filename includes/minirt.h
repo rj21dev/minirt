@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 17:27:00 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:08:27 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
@@ -118,15 +119,6 @@ typedef struct s_cylinder
 	t_color	color;
 }	t_cylinder;
 
-/*
-list, where element is one of the stucts: t_sphere, t_plane, t_cylinder;
-*/
-typedef struct s_elements
-{
-	void			*element;
-	struct elements	*next;
-}	t_elements;
-
 typedef struct s_scene
 {
 	t_camera	*cams;
@@ -136,7 +128,7 @@ typedef struct s_scene
 	t_ambient	ambient; // don't wanna allocate
 	t_camera	camera;
 	t_light		light;
-	t_elements	*elements;
+	t_list		*elements; //list, where element is one of the stucts: t_sphere, t_plane, t_cylinder;
 	void		*mlx_ptr;
 	void		*win_ptr;
 }				t_scene;
