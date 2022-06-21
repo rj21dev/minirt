@@ -15,14 +15,14 @@
 
 # include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
-# include <mlx.h>
+// # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/errno.h>
+# include <errno.h>
 # include "errors.h"
 
 /*fonts color*/
@@ -123,15 +123,13 @@ typedef struct s_cylinder
 typedef struct s_scene
 {
 	t_camera	*cams;
-	t_sphere	*spheres;
-	float		width;
-	float		height;
-	t_ambient	ambient;
-	t_camera	camera;
-	t_light		light;
+	// float		width;
+	// float		height;
+	t_ambient	*ambient;
+	t_light		*light;
 	t_list		*elements; //list, where element is one of the stucts: t_sphere, t_plane, t_cylinder;
-	void		*mlx_ptr;
-	void		*win_ptr;
+	// void		*mlx_ptr;
+	// void		*win_ptr;
 }				t_scene;
 
 t_vector	*new_vector(float x, float y, float z);
@@ -155,6 +153,6 @@ int			ft_errors_handler(char *msg);
 float		ft_atof(char *str);
 int			ft_strcmp(char const *str1, char const *str2);
 
-void		ft_get_elements(char **elem, t_scene *scene);
+void		ft_get_elements(char **elem, t_scene **scene);
 
 #endif
