@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 22:26:15 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/21 10:30:55 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_data
 	int		bpp;
 	int		len;
 	int		endian;
+	float	width;
+	float	height;
 }	t_data;
 
 typedef struct	s_vector
@@ -76,7 +78,7 @@ t_camera	*new_cam(t_vector *origin, t_vector *direction, float fov);
 t_sphere	*new_sphere(t_vector *center, float radius);
 t_scene	*new_scene(t_camera *cam, t_sphere *sphere);
 
-void	ray_traycing(t_data *data, t_scene *scene);
+void	render_scene(t_data *data, t_scene *scene);
 t_vplane	*get_view_plane(float width, float height, float fov);
 int	sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere);
 
