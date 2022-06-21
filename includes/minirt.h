@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 18:08:27 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:48:33 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ typedef struct s_color
 */
 typedef struct s_ambient
 {
-	float	lighting_ratio;
-	t_color	color;
+	float			lighting_ratio;
+	t_color			color;
+	unsigned long	rgb;
 }	t_ambient;
 
 /* Camera struct
@@ -80,7 +81,7 @@ typedef struct s_camera
 */
 typedef struct s_light
 {
-	t_vector	point;
+	t_vector	*point;
 	float		brightness_ratio;
 	t_color		color;
 }	t_light;
@@ -112,11 +113,11 @@ typedef struct s_vplane
 */
 typedef struct s_cylinder
 {
-	t_vector	point;
-	t_vector	or_vec;
+	t_vector	*point;
+	t_vector	*or_vec;
 	float		diameter;
 	float		height;
-	t_color	color;
+	t_color		color;
 }	t_cylinder;
 
 typedef struct s_scene
@@ -125,7 +126,7 @@ typedef struct s_scene
 	t_sphere	*spheres;
 	float		width;
 	float		height;
-	t_ambient	ambient; // don't wanna allocate
+	t_ambient	ambient;
 	t_camera	camera;
 	t_light		light;
 	t_list		*elements; //list, where element is one of the stucts: t_sphere, t_plane, t_cylinder;
@@ -149,6 +150,11 @@ void		ray_traycing(void *mlx, void *window, t_scene *scene);
 t_vplane	*get_view_plane(float width, float height, float fov);
 int			sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere);
 
-int	ft_errors_handler(char *msg);
+int			ft_errors_handler(char *msg);
+
+float		ft_atof(char *str);
+int			ft_strcmp(char const *str1, char const *str2);
+
+void		ft_get_elements(char **elem, t_scene *scene);
 
 #endif
