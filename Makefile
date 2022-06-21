@@ -3,7 +3,7 @@ SRCS_DIR	= srcs/
 OBJS_DIR	= objs/
 INCS_DIR	= includes
 
-SRCS_F		= rt_camera.c rt_figures.c rt_main.c rt_ray_trace.c rt_scene.c rt_sphere_intersect.c rt_utils.c rt_vector.c 
+SRCS_F		= rt_camera.c rt_figures.c rt_main.c rt_ray_trace.c rt_scene.c rt_sphere_intersect.c rt_utils.c rt_vector.c rt_init_data.c rt_events_handlers.c
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
 OBJS_F		= $(patsubst %.c, %.o, $(SRCS_F))
 DEPS_F		= $(patsubst %.c, %.d, $(SRCS_F))
@@ -26,9 +26,6 @@ $(OBJS_DIR) :
 
 $(NAME):  $(OBJS_DIR) $(OBJS) $(LIB_DIR)$(LIB) Makefile
 		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o $@
-
-bonus: $(OBJS_DIR) $(OBJS_B) $(LIB_DIR)$(LIB) Makefile
-		make OBJS="$(OBJS_B)" $(NAME)
 
 $(LIB_DIR)$(LIB) : ;
 		make -C $(LIB_DIR)

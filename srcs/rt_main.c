@@ -6,50 +6,48 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:23 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 10:31:05 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/21 22:58:21 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-static int	close_win(t_data *data)
-{
-	mlx_destroy_image(data->mlx_ptr, data->img);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	free(data);
-	exit(EXIT_SUCCESS);
-}
-
-static t_data	*init_data(int width, int height)
-{
-	t_data *data;
-
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, width, height, "Ray Tracer");
-	data->img = mlx_new_image(data->mlx_ptr, width, height);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->len, &data->endian);
-	data->width = width;
-	data->height = height;
-	return (data);
-}
-
 int	main(void)
 {
-	t_data	*data;
+	t_data		*data;
+	t_list		*objs = NULL;
+	t_vector	*sphere_center;
+	t_sphere	*sphere;
+	t_vector	*cam_origin;
+	t_vector	*cam_direction;
+	t_camera	*cam;
+	t_scene		*scene;
 
-	t_vector	*sphere_center = new_vector(0, 0, 15);
-	t_sphere	*sphere = new_sphere(sphere_center, 5);
-	t_vector	*cam_origin = new_vector(0, 0, 0);
-	t_vector	*cam_direction = new_vector(0, 0, 1);
-	t_camera	*cam = new_cam(cam_origin, cam_direction, 70);
-	t_scene		*scene = new_scene(cam, sphere);
+	sphere_center = new_vector(0, -5, 15);
+	sphere = new_sphere(sphere_center, 5, color_mixer(255, 255, 0));
+	ft_lstadd_back(&objs, ft_lstnew(sphere));
+
+	sphere_center = new_vector(0, 2, 20);
+	sphere = new_sphere(sphere_center, 7, color_mixer(255, 0, 0));
+	ft_lstadd_back(&objs, ft_lstnew(sphere));
+
+	sphere_center = new_vector(6, 0, 13);
+	sphere = new_sphere(sphere_center, 4, color_mixer(0, 255, 0));
+	ft_lstadd_back(&objs, ft_lstnew(sphere));
+
+	sphere_center = new_vector(0, 0, 22);
+	sphere = new_sphere(sphere_center, 10, color_mixer(0, 0, 255));
+	ft_lstadd_back(&objs, ft_lstnew(sphere));
+
+	cam_origin = new_vector(0, 0, 0);
+	cam_direction = new_vector(0, 0, 1);
+	cam = new_cam(cam_origin, cam_direction, 70);
+	scene = new_scene(cam, objs);
 	scene->width = 800;
 	scene->height = 600;
 	data = init_data(scene->width, scene->height);
 	render_scene(data, scene);
+	
 	mlx_hook(data->win_ptr, 17, 0, close_win, data);
 	mlx_loop(data->mlx_ptr);
 	//free_scene(scene);
@@ -58,6 +56,7 @@ int	main(void)
 	free(cam_origin);
 	free(cam_direction);
 	free(cam);
+	// free scene->objs !!!
 	free(scene);
 	// free(data); //free in close_win
 	return (0);

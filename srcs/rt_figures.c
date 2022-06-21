@@ -6,13 +6,13 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:51 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 16:41:53 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/21 13:36:35 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_sphere	*new_sphere(t_vector *center, float radius)
+t_sphere	*new_sphere(t_vector *center, float radius, int color)
 {
 	t_sphere	*sphere;
 
@@ -21,5 +21,6 @@ t_sphere	*new_sphere(t_vector *center, float radius)
 		error_exit(-1);
 	sphere->center = center;
 	sphere->radius = radius;
+	sphere->color = color;
 	return (sphere);
 }

@@ -6,13 +6,13 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 10:37:56 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/21 22:54:11 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 /*
@@ -25,18 +25,37 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	ray_trace(t_vector *ray, t_scene *scene)
+static int	ray_trace(t_vector *ray, t_scene *scene)
 {
-	int	color;
-/*
-*	TODO: find intrsections in all spheres in loop,
-*	get color of closer sphere
-*/
-	if (sphere_intersect(scene->cams, ray, scene->spheres))
-				color = 0xffff00; //sphere color
-			else
-				color = 0x000000; //background color
-	return (color);
+	float		dist1;
+	float		dist2;
+	float		closer_dist;
+	t_sphere	*test;
+	t_sphere	*closer;
+	t_list		*tmp;
+	
+	closer_dist = _INFINITY;
+	closer = NULL;
+	tmp = scene->objs;
+	while (tmp)
+	{
+		test = tmp->content;
+		sphere_intersect(scene->cams, ray, test, &dist1, &dist2);
+		if (dist1 > 1 && dist1 < closer_dist)
+		{
+			closer_dist = dist1;
+			closer = test;
+		}
+		if (dist2 > 1 && dist2 < closer_dist)
+		{
+			closer_dist = dist2;
+			closer = test;
+		}
+		tmp = tmp->next;
+	}
+	if (!closer)
+		return (BACKGROUND_COLOR);
+	return (closer->color);
 }
 
 void	render_scene(t_data *data, t_scene *scene)

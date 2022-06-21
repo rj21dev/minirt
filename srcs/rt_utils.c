@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:32 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 16:41:34 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/21 22:55:01 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,9 @@ void	error_exit(int code)
 	if (code == -1)
 		ft_putendl_fd("Malloc error", STDERR);
 	exit(code);
+}
+
+int	color_mixer(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
 }
