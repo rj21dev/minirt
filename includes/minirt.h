@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/22 13:10:44 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 14:54:41 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ typedef struct s_sphere
 {
 	t_vector	*center;
 	float		radius;
-	t_color		color; // added
+	t_color		color_struct;
+	unsigned long	color;
 }				t_sphere;
 
 // CHECK VIDEO
@@ -118,7 +119,8 @@ typedef struct s_cylinder
 	t_vector	*or_vec;
 	float		diameter;
 	float		height;
-	t_color		color;
+	t_color		color_struct;
+	int			color;
 }	t_cylinder;
 
 typedef struct s_scene
@@ -162,5 +164,8 @@ void		ft_get_elements(char **elem, t_scene **scene);
 void		ft_get_ambient_lightning(char **elem, t_scene **scene);
 void		ft_get_camera(char **elem, t_scene **scene);
 void		ft_get_light(char **elem, t_scene **scene);
+
+void		ft_get_sphere(char **elem, t_scene **scene);
+void		ft_get_cylinder(char **elem, t_scene **scene);
 
 #endif

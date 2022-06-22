@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/22 13:21:59 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:00:03 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,21 @@ void	ft_read_from_file(char *filename, t_scene **scene)
 			(*scene)->light->point->y, (*scene)->light->point->z, \
 			(*scene)->light->brightness_ratio, (*scene)->light->color.r, \
 			(*scene)->light->color.g, (*scene)->light->color.b);
+		if ((*scene)->elements)
+		{
+			t_list *tmp = (*scene)->elements;
+			printf("size: %i\n", ft_lstsize((void *)tmp));
+			int i = 0;
+			while ((*scene)->elements)
+			{
+				if (i == 0)
+					printf("radius: %f\n", ((t_sphere *)((*scene)->elements->content))->radius);
+				if (i == 1)
+					printf("diam: %f\n", ((t_cylinder *)((*scene)->elements->content))->diameter);
+				(*scene)->elements = (*scene)->elements->next;
+				i++;
+			}
+		}
 	}
 	close(fd);
 }
