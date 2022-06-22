@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/22 15:21:03 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:32:22 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@
 
 /*end color*/
 # define NONE        "\033[0m"
+
+# define SPHERE	0
+# define PLANE	1
+# define CYL	2
 
 /* Struct for points with (x, y, z) coordinates.*/
 typedef struct s_vector
@@ -131,6 +135,7 @@ typedef struct s_scene
 	t_ambient	*ambient;
 	t_light		*light;
 	t_list		*elements; //list, where element is one of the stucts: t_sphere, t_plane, t_cylinder;
+	t_list		*id;
 	// void		*mlx_ptr;
 	// void		*win_ptr;
 }				t_scene;
@@ -169,5 +174,6 @@ void		ft_get_sphere(char **elem, t_scene **scene);
 void		ft_get_cylinder(char **elem, t_scene **scene);
 
 void		ft_clear(t_scene **scene);
+void	ft_clear_split(char **str);
 
 #endif

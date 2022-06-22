@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/22 15:33:30 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:35:55 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_read_from_file(char *filename, t_scene **scene)
 	char	*line;
 	char	**elements;
 
+	elements = NULL;
 	fd = open(filename, O_RDWR);
 	if (fd < 0)
 		ft_errors_handler(strerror(errno));
@@ -37,16 +38,11 @@ void	ft_read_from_file(char *filename, t_scene **scene)
 	{
 		if (line && strcmp(line, "\n"))
 		{
-			elements = ft_split(line, ' ');
+			elements = ft_t(line, ' ');
 			ft_get_elements(elements, scene);
 		}
+		ft_clear_split(elements);
 		free(line);
-		if (elements)
-		{
-			while (*elements)
-				free(++*elements);
-			free(elements);
-		}
 		line = get_next_line(fd);
 	}
 	// if (*scene)

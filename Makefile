@@ -19,7 +19,7 @@ OBJS		= $(addprefix $(OBJS_DIR), $(OBJS_F))
 DEPS		= $(addprefix $(OBJS_DIR), $(DEPS_F))
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -MMD
+CFLAGS		= -Wall -Wextra -Werror -MMD #-fsanitize=address
 # LFLAGS		= -Llibft -L/usr/local/lib -lft -lmlx -lXext -lX11 -lm
 LFLAGS		= -Llibft -L/usr/local/lib -lft -lmlx -framework OpenGL -framework AppKit
 LIB			= libft.a
