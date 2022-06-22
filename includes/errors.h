@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:43:42 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/21 15:32:11 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:02:57 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # define MAP_ERROR_WRONG_INP	"MiniRT: map error - wrong input."
 # define MAP_ERROR_DUPLICATE_A  "Ambient lightning can only be declared once."
 # define MAP_ERROR_DUPLICATE_C  "Camera can only be declared once."
+# define MAP_ERROR_DUPLICATE_L  "Light can only be declared once."
 
 #endif

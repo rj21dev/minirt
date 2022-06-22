@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/21 15:22:29 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:21:59 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,23 @@ void	ft_read_from_file(char *filename, t_scene **scene)
 		free(line);
 		free(elements);
 		line = get_next_line(fd);
+	}
+	if (*scene)
+	{
+		if ((*scene)->ambient)
+			printf("A %.1f, %i,%i,%i\n", (*scene)->ambient->lighting_ratio, \
+			(*scene)->ambient->color.r, (*scene)->ambient->color.g, \
+			(*scene)->ambient->color.b);
+		if ((*scene)->cams)
+			printf("C %.1f,%.1f,%.1f %.1f,%.1f,%.1f %.1f\n", (*scene)->cams->origin->x, \
+			(*scene)->cams->origin->y, (*scene)->cams->origin->z, \
+			(*scene)->cams->direction->x, (*scene)->cams->direction->y, \
+			(*scene)->cams->direction->z, (*scene)->cams->fov);
+		if ((*scene)->light)
+			printf("L %.1f,%.1f,%.1f %.1f %i,%i,%i\n", (*scene)->light->point->x, \
+			(*scene)->light->point->y, (*scene)->light->point->z, \
+			(*scene)->light->brightness_ratio, (*scene)->light->color.r, \
+			(*scene)->light->color.g, (*scene)->light->color.b);
 	}
 	close(fd);
 }

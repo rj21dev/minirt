@@ -7,6 +7,7 @@ INCS_DIR	= includes
 SRCS_F		= rt_parser.c \
 			rt_errors.c \
 			rt_get_elements.c \
+			rt_get_required_elements.c \
 			rt_parser_utils.c
 			
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
