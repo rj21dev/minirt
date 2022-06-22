@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:01:31 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/22 15:10:05 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:23:16 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void	ft_get_elements(char **elem, t_scene **scene)
 		ft_get_camera(elem, scene);
 	if (!ft_strcmp(elem[0], "L") && elem[1] && elem[2] && elem[3] && !elem[4])
 		ft_get_light(elem, scene);
-	if (!ft_strcmp(elem[0], "sp") && elem[1] && elem[2] && elem[3] && !elem[4])
-		ft_get_sphere(elem, scene);
-	if (!ft_strcmp(elem[0], "cy") && elem[1] && elem[2] && elem[3] && elem[4] \
-	&& elem[5] && !elem[6])
-		ft_get_cylinder(elem, scene);
+	// if (!ft_strcmp(elem[0], "sp") && elem[1] && elem[2] && elem[3] && !elem[4])
+	// 	ft_get_sphere(elem, scene);
+	// if (!ft_strcmp(elem[0], "cy") && elem[1] && elem[2] && elem[3] && elem[4] \
+	// && elem[5] && !elem[6])
+	// 	ft_get_cylinder(elem, scene);
 	// int i = 0;
 	// while (*elem)
 	// {

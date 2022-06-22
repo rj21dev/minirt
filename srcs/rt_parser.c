@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/22 15:00:03 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:33:30 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,41 +41,46 @@ void	ft_read_from_file(char *filename, t_scene **scene)
 			ft_get_elements(elements, scene);
 		}
 		free(line);
-		free(elements);
+		if (elements)
+		{
+			while (*elements)
+				free(++*elements);
+			free(elements);
+		}
 		line = get_next_line(fd);
 	}
-	if (*scene)
-	{
-		if ((*scene)->ambient)
-			printf("A %.1f, %i,%i,%i\n", (*scene)->ambient->lighting_ratio, \
-			(*scene)->ambient->color.r, (*scene)->ambient->color.g, \
-			(*scene)->ambient->color.b);
-		if ((*scene)->cams)
-			printf("C %.1f,%.1f,%.1f %.1f,%.1f,%.1f %.1f\n", (*scene)->cams->origin->x, \
-			(*scene)->cams->origin->y, (*scene)->cams->origin->z, \
-			(*scene)->cams->direction->x, (*scene)->cams->direction->y, \
-			(*scene)->cams->direction->z, (*scene)->cams->fov);
-		if ((*scene)->light)
-			printf("L %.1f,%.1f,%.1f %.1f %i,%i,%i\n", (*scene)->light->point->x, \
-			(*scene)->light->point->y, (*scene)->light->point->z, \
-			(*scene)->light->brightness_ratio, (*scene)->light->color.r, \
-			(*scene)->light->color.g, (*scene)->light->color.b);
-		if ((*scene)->elements)
-		{
-			t_list *tmp = (*scene)->elements;
-			printf("size: %i\n", ft_lstsize((void *)tmp));
-			int i = 0;
-			while ((*scene)->elements)
-			{
-				if (i == 0)
-					printf("radius: %f\n", ((t_sphere *)((*scene)->elements->content))->radius);
-				if (i == 1)
-					printf("diam: %f\n", ((t_cylinder *)((*scene)->elements->content))->diameter);
-				(*scene)->elements = (*scene)->elements->next;
-				i++;
-			}
-		}
-	}
+	// if (*scene)
+	// {
+	// 	if ((*scene)->ambient)
+	// 		printf("A %.1f, %i,%i,%i\n", (*scene)->ambient->lighting_ratio, \
+	// 		(*scene)->ambient->color.r, (*scene)->ambient->color.g, \
+	// 		(*scene)->ambient->color.b);
+	// 	if ((*scene)->cams)
+	// 		printf("C %.1f,%.1f,%.1f %.1f,%.1f,%.1f %.1f\n", (*scene)->cams->origin->x, \
+	// 		(*scene)->cams->origin->y, (*scene)->cams->origin->z, \
+	// 		(*scene)->cams->direction->x, (*scene)->cams->direction->y, \
+	// 		(*scene)->cams->direction->z, (*scene)->cams->fov);
+	// 	if ((*scene)->light)
+	// 		printf("L %.1f,%.1f,%.1f %.1f %i,%i,%i\n", (*scene)->light->point->x, \
+	// 		(*scene)->light->point->y, (*scene)->light->point->z, \
+	// 		(*scene)->light->brightness_ratio, (*scene)->light->color.r, \
+	// 		(*scene)->light->color.g, (*scene)->light->color.b);
+	// 	if ((*scene)->elements)
+	// 	{
+	// 		t_list *tmp = (*scene)->elements;
+	// 		printf("size: %i\n", ft_lstsize((void *)tmp));
+	// 		int i = 0;
+	// 		while ((*scene)->elements)
+	// 		{
+	// 			if (i == 0)
+	// 				printf("radius: %f\n", ((t_sphere *)((*scene)->elements->content))->radius);
+	// 			if (i == 1)
+	// 				printf("diam: %f\n", ((t_cylinder *)((*scene)->elements->content))->diameter);
+	// 			(*scene)->elements = (*scene)->elements->next;
+	// 			i++;
+	// 		}
+	// 	}
+	// }
 	close(fd);
 }
 
@@ -102,5 +107,6 @@ int	main(int argc, char **argv)
 	ft_check_extension(argv[1]);
 	scene = ft_init();
 	ft_read_from_file(argv[1], &scene);
+	ft_clear(&scene);
 	return (0);
 }

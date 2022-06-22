@@ -9,7 +9,8 @@ SRCS_F		= rt_parser.c \
 			rt_get_elements.c \
 			rt_get_required_elements.c \
 			rt_get_objects.c \
-			rt_parser_utils.c
+			rt_parser_utils.c \
+			rt_clear_data.c
 			
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
 OBJS_F		= $(patsubst %.c, %.o, $(SRCS_F))

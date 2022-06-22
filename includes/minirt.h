@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/22 14:54:41 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:21:03 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,7 @@ void		ft_get_light(char **elem, t_scene **scene);
 
 void		ft_get_sphere(char **elem, t_scene **scene);
 void		ft_get_cylinder(char **elem, t_scene **scene);
+
+void		ft_clear(t_scene **scene);
 
 #endif
