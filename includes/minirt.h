@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/22 16:32:22 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:06:06 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@
 /*end color*/
 # define NONE        "\033[0m"
 
-# define SPHERE	0
-# define PLANE	1
-# define CYL	2
+# define SPHERE	"sphere"
+# define PLANE	"plane"
+# define CYL	"cyl"
 
 /* Struct for points with (x, y, z) coordinates.*/
 typedef struct s_vector

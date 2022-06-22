@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:09 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/22 16:38:54 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 17:22:57 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,44 +26,59 @@ void	ft_clear_split(char **str)
 	str = NULL;
 }
 
-void	ft_clear(t_scene **scene)
+void	ft_clear_camera(t_scene **scene)
+{
+	if ((*scene)->cams->direction)
+		free((*scene)->cams->direction);
+	if ((*scene)->cams->origin)
+		free((*scene)->cams->origin);
+	free((*scene)->cams);
+}
+
+void	ft_clear_light(t_scene **scene)
+{
+	if ((*scene)->light->point)
+		free((*scene)->light->point);
+	free((*scene)->light);
+}
+
+void	ft_clear_elements(t_scene **scene)
 {
 	t_list	*tmp;
 
-	if ((*scene)->cams)
+	while ((*scene)->elements)
 	{
-		if ((*scene)->cams->direction)
-			free((*scene)->cams->direction);
-		if ((*scene)->cams->origin)
-			free((*scene)->cams->origin);
-		free((*scene)->cams);
-	}
-	if ((*scene)->ambient)
-		free((*scene)->ambient);
-	if ((*scene)->light)
-	{
-		if ((*scene)->light->point)
-			free((*scene)->light->point);
-		free((*scene)->light);
-	}
-	if ((*scene)->elements)
-	{
-		while ((*scene)->elements)
+		printf("id: %s\n", (char *)((*scene)->id->content));
+		if (!ft_strcmp((char *)((*scene)->id->content), SPHERE))
+			free(((t_sphere *)(*scene)->elements->content)->center);
+		if (!ft_strcmp((char *)((*scene)->id->content), CYL))
 		{
-			if ((int)(*scene)->id == SPHERE)
-				free(((t_sphere *)(*scene)->elements->content)->center);
-			if ((int)(*scene)->id == CYL)
-			{
-				free(((t_cylinder *)(*scene)->elements->content)->point);
-				free(((t_cylinder *)(*scene)->elements->content)->or_vec);
-			}
-			tmp = (*scene)->elements;
-			(*scene)->elements = (*scene)->elements->next;
-			free(tmp);
-			tmp = (*scene)->id;
-			(*scene)->id = (*scene)->id->next;
-			free(tmp);
+			free(((t_cylinder *)(*scene)->elements->content)->point);
+			free(((t_cylinder *)(*scene)->elements->content)->or_vec);
 		}
+		free((*scene)->id->content);
+		free((*scene)->elements->content);
+		tmp = (*scene)->elements;
+		(*scene)->elements = (*scene)->elements->next;
+		free(tmp);
+		tmp = (*scene)->id;
+		(*scene)->id = (*scene)->id->next;
+		free(tmp);
+	}
+}
 
+void	ft_clear(t_scene **scene)
+{
+	if (*scene)
+	{
+		if ((*scene)->cams)
+			ft_clear_camera(scene);
+		if ((*scene)->ambient)
+			free((*scene)->ambient);
+		if ((*scene)->light)
+			ft_clear_light(scene);
+		if ((*scene)->elements)
+			ft_clear_elements(scene);
+		free(*scene);
 	}
 }
