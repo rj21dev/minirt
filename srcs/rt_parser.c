@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/22 16:35:55 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/22 16:38:23 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_read_from_file(char *filename, t_scene **scene)
 	{
 		if (line && strcmp(line, "\n"))
 		{
-			elements = ft_t(line, ' ');
+			elements = ft_split(line, ' ');
 			ft_get_elements(elements, scene);
 		}
 		ft_clear_split(elements);
