@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 14:36:15 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/23 16:49:35 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	
 	closer_dist = _INFINITY;
 	closer = NULL;
-	tmp = scene->objs;
+	tmp = scene->elements;
 	while (tmp)
 	{
 		test = tmp->content;
+		//if (!strcmp((char *)((*scene)->id->content), SPHERE))
 		sphere_intersect(scene->cams, ray, test, &dist1, &dist2);
 		if (dist1 > 1 && dist1 < closer_dist)
 		{
@@ -55,6 +56,7 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 			closer = test;
 		}
 		tmp = tmp->next;
+		// (*scene)->id = (*scene)->id->next;
 	}
 	if (!closer)
 		return (BACKGROUND_COLOR);
