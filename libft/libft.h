@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 19:25:42 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 16:40:55 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/23 19:54:53 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define HEX "0123456789abcdef"
 # define HEX_UP "0123456789ABCDEF"
 
-# define BUFFER_SIZE 2048
+# define BUFFER_SIZE 1
 # define OPEN_MAX 1024
 # define MAX_OF_INT 2147483647 
 # define MIN_OF_INT -2147483648

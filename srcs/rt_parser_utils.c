@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:03:59 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/21 14:28:47 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/23 19:25:02 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ float	ft_atof(char *str)
 		res = res * 10 + str[i] - '0';
 		++i;
 	}
-	if (str[i++] == '.')
+	if (str[i] && str[i++] == '.')
 		decimal = ft_get_decimal(&str[i]);
 	return (sign * (res + decimal));
 }

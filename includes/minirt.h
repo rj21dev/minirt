@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 16:53:26 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/23 20:20:55 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ int			ft_strcmp(char const *str1, char const *str2);
 unsigned long	ft_get_color(int r, int g, int b);
 t_color		ft_get_color_struct(char *str);
 t_vector	*ft_get_coordiantes(char *str);
-void		ft_get_elements(char **elem, t_scene **scene);
+void		ft_get_elements(char **el, t_scene **scene);
 
 void		ft_get_ambient_lightning(char **elem, t_scene **scene);
 void		ft_get_camera(char **elem, t_scene **scene);

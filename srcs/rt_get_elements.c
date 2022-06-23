@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:01:31 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/22 16:33:50 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/23 20:44:21 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,29 @@ t_vector	*ft_get_coordiantes(char *str)
 	else
 		ft_errors_handler(MAP_ERROR_WRONG_INP);
 	ft_clear_split(tmp);
+	printf("Point: %f, %f, %f\n", point->x, point->y, point->z);
 	return (point);
 }
 //cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
-void	ft_get_elements(char **elem, t_scene **scene)
+void	ft_get_elements(char **el, t_scene **scene)
 {
-	if (!ft_strcmp(elem[0], "A") && elem[1] && elem[2] && !elem[3])
-		ft_get_ambient_lightning(elem, scene);
-	if (!ft_strcmp(elem[0], "C") && elem[1] && elem[2] && elem[3] && !elem[4])
-		ft_get_camera(elem, scene);
-	if (!ft_strcmp(elem[0], "L") && elem[1] && elem[2] && elem[3] && !elem[4])
-		ft_get_light(elem, scene);
-	if (!ft_strcmp(elem[0], "sp") && elem[1] && elem[2] && elem[3] && !elem[4])
-		ft_get_sphere(elem, scene);
-	if (!ft_strcmp(elem[0], "cy") && elem[1] && elem[2] && elem[3] && elem[4] \
-	&& elem[5] && !elem[6])
-		ft_get_cylinder(elem, scene);
-	// int i = 0;
-	// while (*elem)
-	// {
-	// 	i++;
-	// 	elem++;
-	// }
-	// printf("num of elem: %i\n", i);
-	// else
-	// 	ft_errors_handler(MAP_ERROR_UNKNOWN_ID);
+	if (!ft_strcmp(el[0], "\n"))
+		return ;
+	else if (!ft_strcmp(el[0], "A") && el[1] && el[2] && !el[3])
+		ft_get_ambient_lightning(el, scene);
+	else if (!ft_strcmp(el[0], "C") && el[1] && el[2] && el[3] && !el[4])
+		ft_get_camera(el, scene);
+	else if (!ft_strcmp(el[0], "L") && el[1] && el[2] && el[3] && !el[4])
+		ft_get_light(el, scene);
+	else if (!ft_strcmp(el[0], "sp") && el[1] && el[2] && el[3] && !el[4])
+		ft_get_sphere(el, scene);
+	else if (!ft_strcmp(el[0], "cy") && el[1] && el[2] && el[3] && el[4] \
+	&& el[5] && !el[6])
+	{
+		ft_get_cylinder(el, scene);
+		printf("Hi\n");
+	}
+	else
+		ft_errors_handler(MAP_ERROR_UNKNOWN_ID);
 }
 

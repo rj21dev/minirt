@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:23 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 17:01:57 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/23 21:02:35 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_data		*data;
+	// t_data		*data;
 	// t_list		*objs = NULL;
 	// t_vector	*sphere_center;
 	// t_sphere	*sphere;
@@ -52,12 +52,37 @@ int	main(int argc, char **argv)
 	
 	scene->width = 800;
 	scene->height = 600;
-	data = init_data(scene->width, scene->height);
-	printf("lol\n");
-	render_scene(data, scene);
+	// data = init_data(scene->width, scene->height);
+	if (scene->elements && scene->id)
+		printf("size: %i, %i\n", ft_lstsize(scene->elements), ft_lstsize(scene->id));
+	t_list		*elements;
+	t_list		*id;
+	elements = scene->elements;
+	id = scene->id;
+	while (elements && id)
+	{
+		if (!ft_strcmp((char *)(id->content), SPHERE))
+		{
+			printf("Sphere: %f,%f,%f %f %i,%i,%i\n", \
+			((t_sphere *)(elements->content))->center->x, ((t_sphere *)(elements->content))->center->y, ((t_sphere *)(elements->content))->center->z, \
+			((t_sphere *)(elements->content))->radius, \
+			((t_sphere *)(elements->content))->color_struct.r, ((t_sphere *)(elements->content))->color_struct.g, ((t_sphere *)(elements->content))->color_struct.b);
+		}
+		if (!ft_strcmp((char *)(id->content), CYL))
+		{
+			printf("CYL: %f,%f,%f %f,%f,%f %f %f %i,%i,%i\n", \
+			((t_cylinder *)(elements->content))->point->x, ((t_cylinder *)(elements->content))->point->y, ((t_cylinder *)(elements->content))->point->z, \
+			((t_cylinder *)(elements->content))->or_vec->x, ((t_cylinder *)(elements->content))->or_vec->y, ((t_cylinder *)(elements->content))->or_vec->z, \
+			((t_cylinder *)(elements->content))->diameter, ((t_cylinder *)(elements->content))->height, \
+			((t_cylinder *)(elements->content))->color_struct.r, ((t_cylinder *)(elements->content))->color_struct.g, ((t_cylinder *)(elements->content))->color_struct.b);
+		}
+		elements = elements->next;
+		id = id->next;
+	}
+	// render_scene(data, scene);
 	
-	mlx_hook(data->win_ptr, 17, 0, close_win, data);
-	mlx_loop(data->mlx_ptr);
+	// mlx_hook(data->win_ptr, 17, 0, close_win, data);
+	// mlx_loop(data->mlx_ptr);
 	// //free_scene(scene);
 	// // free(sphere_center);
 	// // free(sphere);
