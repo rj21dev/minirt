@@ -16,7 +16,7 @@ void	ft_get_sphere(char **elem, t_scene **scene)
 {
 	t_sphere	*sphere;
 
-	sphere = malloc(sizeof(sphere));
+	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
 		ft_errors_handler(strerror(errno));
 	sphere->center = ft_get_coordiantes(elem[1]);
@@ -24,7 +24,6 @@ void	ft_get_sphere(char **elem, t_scene **scene)
 	sphere->color_struct = ft_get_color_struct(elem[3]);
 	sphere->color = ft_get_color(sphere->color_struct.r, \
 	sphere->color_struct.g, sphere->color_struct.b);
-	// obj = ft_lstnew((void *)sphere);
 	ft_lstadd_back(&(*scene)->elements, ft_lstnew((void *)sphere));
 	ft_lstadd_back(&(*scene)->id, ft_lstnew((void *)ft_strdup(SPHERE)));
 	printf("Point_sp: %f, %f, %f\n", sphere->center->x, sphere->center->y, sphere->center->z);
@@ -36,7 +35,7 @@ void	ft_get_cylinder(char **elem, t_scene **scene)
 	t_cylinder	*cylinder;
 	t_list		*obj;
 
-	cylinder = malloc(sizeof(cylinder));
+	cylinder = malloc(sizeof(t_cylinder));
 	if (!cylinder)
 		ft_errors_handler(strerror(errno));
 	cylinder->point = ft_get_coordiantes(elem[1]);

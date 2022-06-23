@@ -72,6 +72,8 @@ void	ft_get_elements(char **el, t_scene **scene)
 		ft_get_light(el, scene);
 	else if (!ft_strcmp(el[0], "sp") && el[1] && el[2] && el[3] && !el[4])
 		ft_get_sphere(el, scene);
+	else if (!ft_strcmp(el[0], "pl") && el[1] && el[2] && el[3] && !el[4])
+		return ;
 	else if (!ft_strcmp(el[0], "cy") && el[1] && el[2] && el[3] && el[4] \
 	&& el[5] && !el[6])
 	{

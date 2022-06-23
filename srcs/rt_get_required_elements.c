@@ -41,7 +41,7 @@ void	ft_get_light(char **elem, t_scene **scene)
 {
 	if ((*scene)->light)
 		ft_errors_handler(MAP_ERROR_DUPLICATE_L);
-	(*scene)->light = malloc(sizeof(t_camera));
+	(*scene)->light = malloc(sizeof(t_light));
 	if (!(*scene)->light)
 		ft_errors_handler(strerror(errno));
 	(*scene)->light->point = ft_get_coordiantes(elem[1]);

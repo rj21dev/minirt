@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	// cam_direction = new_vector(0, 0, 1);
 	// cam = new_cam(cam_origin, cam_direction, 70);
 	// scene = new_scene(cam, objs);
-	
+	printf("Here\n");
 	if (argc != 2)
 		ft_errors_handler(ARGS_COUNT_FAILURE);
 	ft_check_extension(argv[1]);
