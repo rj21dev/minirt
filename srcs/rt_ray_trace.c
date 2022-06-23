@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_ray_trace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 22:54:11 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/23 14:36:15 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 */
 	x = data->width / 2 + x;
 	y = data->height / 2 - y;
-	dst = data->addr + (y * data->len + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
+	if (x > 0 && x < data->width && y > 0 && y < data->height)
+	{
+		dst = data->addr + (y * data->len + x * (data->bpp / 8));
+		*(unsigned int*)dst = color;
+	}
 }
 
 static int	ray_trace(t_vector *ray, t_scene *scene)

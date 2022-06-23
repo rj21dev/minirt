@@ -12,7 +12,8 @@ DEPS		= $(addprefix $(OBJS_DIR), $(DEPS_F))
 
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -MMD
-LFLAGS		= -Llibft -L/usr/local/lib -lft -lmlx -lXext -lX11 -lm
+LFLAGS_M	= -Llibft -L/usr/local/lib -lft -lmlx -framework OpenGL -framework AppKit
+LFLAGS_L	= -Llibft -L/usr/local/lib -lft -lmlx -lXext -lX11 -lm
 LIB			= libft.a
 LIB_DIR		= libft/
 
@@ -25,7 +26,7 @@ $(OBJS_DIR) :
 		mkdir -p $@
 
 $(NAME):  $(OBJS_DIR) $(OBJS) $(LIB_DIR)$(LIB) Makefile
-		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) -o $@
+		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS_M) -o $@
 
 $(LIB_DIR)$(LIB) : ;
 		make -C $(LIB_DIR)
