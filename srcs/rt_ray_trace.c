@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_ray_trace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 16:49:35 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/25 00:03:05 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 
 static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char	*dst;
-/*
-* Convert View Port Coords x = (-400, 400), y = (300, -300)
-* to Canvas Coords x = (0, 800), y = (0, 600) and PutPixel
-*/
-	x = data->width / 2 + x;
-	y = data->height / 2 - y;
-	if (x > 0 && x < data->width && y > 0 && y < data->height)
+	char	*addr;
+
+	x = WIDTH / 2 + x;
+	y = HEIGHT / 2 - y;
+	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 	{
-		dst = data->addr + (y * data->len + x * (data->bpp / 8));
-		*(unsigned int*)dst = color;
+		addr = data->addr + (y * data->len + x * (data->bpp / 8));
+		*(unsigned int*)addr = color;
 	}
 }
 
 static int	ray_trace(t_vector *ray, t_scene *scene)
 {
-	float		dist1;
-	float		dist2;
+	float		dist[2];
 	float		closer_dist;
 	t_sphere	*test;
 	t_sphere	*closer;
@@ -44,15 +40,15 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	{
 		test = tmp->content;
 		//if (!strcmp((char *)((*scene)->id->content), SPHERE))
-		sphere_intersect(scene->cams, ray, test, &dist1, &dist2);
-		if (dist1 > 1 && dist1 < closer_dist)
+		sphere_intersect(scene->cams, ray, test, dist);
+		if (dist[0] > 1 && dist[0] < closer_dist)
 		{
-			closer_dist = dist1;
+			closer_dist = dist[0];
 			closer = test;
 		}
-		if (dist2 > 1 && dist2 < closer_dist)
+		if (dist[1] > 1 && dist[1] < closer_dist)
 		{
-			closer_dist = dist2;
+			closer_dist = dist[1];
 			closer = test;
 		}
 		tmp = tmp->next;
@@ -60,7 +56,25 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	}
 	if (!closer)
 		return (BACKGROUND_COLOR);
-	return (closer->color);
+	t_vector *mult = vec_mult(closer_dist, ray);
+	t_vector *point = vec_add(scene->cams->origin, mult);
+	t_vector *normal = vec_substract(closer->center, point);
+	vec_normalize(normal);
+	// t_vector *light = new_vector(10, -10, 3);
+	t_vector *vec_1 = vec_substract(scene->light->point, point);
+	float n_dot = vec_dot_product(normal, vec_1);
+	float intensity = 0;
+	intensity += scene->ambient->lighting_ratio;
+	if (n_dot > 0)
+		intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_1);
+	t_vector *cols = col_mult(intensity, closer->color_struct);
+	int color = color_mixer(cols);
+	free(cols);
+	free(point);
+	free(normal);
+	free(vec_1);
+	free(mult);
+	return (color);
 }
 
 void	render_scene(t_data *data, t_scene *scene)
@@ -72,11 +86,11 @@ void	render_scene(t_data *data, t_scene *scene)
 	t_vplane	*vp;
 
 	vp = get_view_plane(scene->width, scene->height, scene->cams->fov);
-	y_vp = scene->height / 2;
-	while (y_vp >= scene->height / 2 * (-1))
+	y_vp = HEIGHT / 2;
+	while (y_vp >= HEIGHT / 2 * (-1))
 	{
-		x_vp = scene->width / 2 * (-1);
-		while (x_vp <= scene->width / 2)
+		x_vp = WIDTH / 2 * (-1);
+		while (x_vp <= WIDTH / 2)
 		{
 			ray = new_vector(x_vp * vp->x_pixel, y_vp * vp->y_pixel, 1);
 			vec_normalize(ray);
@@ -98,7 +112,7 @@ t_vplane	*get_view_plane(float width, float height, float fov)
 
 	vplane = malloc(sizeof(t_vplane));
 	if (!vplane)
-		error_exit(-1);
+		ft_errors_handler(strerror(errno));
 	aspect_ratio = width / height;
 	vplane->width = 2 * (tan(fov / 2 * (M_PI / 180)));
 	vplane->height = vplane->width / aspect_ratio;

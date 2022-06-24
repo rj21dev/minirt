@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:28 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 16:41:30 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/24 22:41:53 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_vector	*new_vector(float x, float y, float z)
 
 	vec = malloc(sizeof(t_vector));
 	if (!vec)
-		error_exit(-1);
+		ft_errors_handler(strerror(errno));;
 	vec->x = x;
 	vec->y = y;
 	vec->z = z;

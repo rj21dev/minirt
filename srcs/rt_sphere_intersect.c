@@ -6,13 +6,13 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:39 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 22:45:14 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/24 23:42:09 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist1, float *dist2)
+void	sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist)
 {
 	float		a;
 	float		b;
@@ -28,10 +28,10 @@ void	sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dis
 	free(cam_sphere);
 	if (discr < 0)
 	{
-		*dist1 = _INFINITY;
-		*dist2 = _INFINITY;
+		dist[0] = _INFINITY;
+		dist[1] = _INFINITY;
 		return ;
 	}
-	*dist1 = b * (-1) - sqrt(discr) / 2 * a;
-	*dist2 = b * (-1) + sqrt(discr) / 2 * a;
+	dist[0] = (b * (-1) - sqrt(discr)) / 2 * a;
+	dist[1] = (b * (-1) + sqrt(discr)) / 2 * a;
 }

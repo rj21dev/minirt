@@ -3,14 +3,10 @@ SRCS_DIR	= srcs/
 OBJS_DIR	= objs/
 INCS_DIR	= includes
 
-SRCS_F		= rt_camera.c rt_figures.c rt_main.c rt_ray_trace.c rt_scene.c rt_sphere_intersect.c rt_utils.c rt_vector.c rt_init_data.c rt_events_handlers.c \
-				rt_parser.c \
-			rt_errors.c \
-			rt_get_elements.c \
-			rt_get_required_elements.c \
-			rt_get_objects.c \
-			rt_parser_utils.c \
-			rt_clear_data.c
+SRCS_F		= rt_main.c rt_ray_trace.c rt_sphere_intersect.c rt_utils.c rt_vector.c rt_init_data.c rt_events_handlers.c \
+				rt_parser.c rt_errors.c rt_get_elements.c rt_get_required_elements.c rt_get_objects.c rt_parser_utils.c \
+				rt_clear_data.c rt_vector2.c
+
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
 OBJS_F		= $(patsubst %.c, %.o, $(SRCS_F))
 DEPS_F		= $(patsubst %.c, %.d, $(SRCS_F))
@@ -33,7 +29,7 @@ $(OBJS_DIR) :
 		mkdir -p $@
 
 $(NAME):  $(OBJS_DIR) $(OBJS) $(LIB_DIR)$(LIB) Makefile
-		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS_M) -o $@
+		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS_L) -o $@
 
 $(LIB_DIR)$(LIB) : ;
 		make -C $(LIB_DIR)
@@ -49,6 +45,6 @@ fclean : clean
 re: fclean all
 
 .PHONY:
-		all clean fclean re bonus
+		all clean fclean re
 
 -include $(DEPS)

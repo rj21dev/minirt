@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/24 16:46:24 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/25 00:00:18 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_scene	*ft_init(void)
 	scene->light = NULL;
 	scene->elements = NULL;
 	scene->id = NULL;
+	scene->width = WIDTH;
+	scene->height = HEIGHT;
 	return (scene);
 }
 
