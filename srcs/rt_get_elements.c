@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:01:31 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/24 16:13:16 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:45:11 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ t_color	ft_get_color_struct(char *str)
 	else
 		ft_errors_handler(MAP_ERROR_WRONG_INP);
 	ft_split_free(tmp);
+	if (color.r > 255 || color.g > 255 || color.b > 255 || \
+	color.r < 0 || color.g < 0 || color.b < 0)
+		ft_errors_handler(RGB_COLORS_RANGE_ERR);
 	return (color);
 }
 
@@ -56,10 +59,17 @@ t_vector	*ft_get_coordiantes(char *str)
 	else
 		ft_errors_handler(MAP_ERROR_WRONG_INP);
 	ft_split_free(tmp);
-	printf("Point: %f, %f, %f\n", point->x, point->y, point->z);
 	return (point);
 }
-//cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
+
+int	ft_orientation_vector_check(t_vector *point)
+{
+	if (point->x > 1.0 || point->y > 1.0 || point->z > 1.0 || \
+	point->x < -1.0 || point->y < -1.0 || point->z < -1.0)
+		return (1);
+	return (0);
+}
+
 void	ft_get_elements(char **el, t_scene **scene)
 {
 	if (!ft_strcmp(el[0], "\n"))
@@ -80,4 +90,3 @@ void	ft_get_elements(char **el, t_scene **scene)
 	else
 		ft_errors_handler(MAP_ERROR_UNKNOWN_ID);
 }
-

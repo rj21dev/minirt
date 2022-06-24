@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/24 16:09:19 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:31:45 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ int			ft_strcmp(char const *str1, char const *str2);
 int			ft_get_color(int r, int g, int b);
 t_color		ft_get_color_struct(char *str);
 t_vector	*ft_get_coordiantes(char *str);
+int			ft_orientation_vector_check(t_vector *point);
 void		ft_get_elements(char **el, t_scene **scene);
 
 void		ft_get_ambient_lightning(char **elem, t_scene **scene);

@@ -6,12 +6,11 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/24 16:00:58 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:46:24 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
 
 void	ft_check_extension(char *file)
 {
@@ -37,7 +36,6 @@ void	ft_read_from_file(char *filename, t_scene **scene)
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("line: %s first char: %i\n", line, line[0]);
 		elements = ft_split(line, ' ');
 		ft_get_elements(elements, scene);
 		ft_split_free(elements);

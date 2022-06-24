@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:23 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/24 16:11:38 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:46:54 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	main(int argc, char **argv)
 	// cam_direction = new_vector(0, 0, 1);
 	// cam = new_cam(cam_origin, cam_direction, 70);
 	// scene = new_scene(cam, objs);
-	printf("Here\n");
 	if (argc != 2)
 		ft_errors_handler(ARGS_COUNT_FAILURE);
 	ft_check_extension(argv[1]);
