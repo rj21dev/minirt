@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:39 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 22:45:14 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/24 18:46:57 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dis
 		*dist2 = _INFINITY;
 		return ;
 	}
-	*dist1 = b * (-1) - sqrt(discr) / 2 * a;
-	*dist2 = b * (-1) + sqrt(discr) / 2 * a;
+	*dist1 = (b * (-1) - sqrt(discr)) / 2 * a;
+	*dist2 = (b * (-1) + sqrt(discr)) / 2 * a;
 }

@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:23 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 22:58:21 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/24 19:40:31 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,25 @@ int	main(void)
 	t_camera	*cam;
 	t_scene		*scene;
 
-	sphere_center = new_vector(0, -5, 15);
-	sphere = new_sphere(sphere_center, 5, color_mixer(255, 255, 0));
+	
+	// sphere_center = new_vector(3, 0, 10);
+	// sphere = new_sphere(sphere_center, 3, 255, 0, 0);
+	// ft_lstadd_back(&objs, ft_lstnew(sphere));
+
+	sphere_center = new_vector(0, -1, 3);
+	sphere = new_sphere(sphere_center, 1, 255, 0, 0);
 	ft_lstadd_back(&objs, ft_lstnew(sphere));
 
-	sphere_center = new_vector(0, 2, 20);
-	sphere = new_sphere(sphere_center, 7, color_mixer(255, 0, 0));
+	sphere_center = new_vector(2, 0, 4);
+	sphere = new_sphere(sphere_center, 1, 0, 0, 255);
 	ft_lstadd_back(&objs, ft_lstnew(sphere));
 
-	sphere_center = new_vector(6, 0, 13);
-	sphere = new_sphere(sphere_center, 4, color_mixer(0, 255, 0));
+	sphere_center = new_vector(-2, 0, 4);
+	sphere = new_sphere(sphere_center, 1, 0, 255, 0);
 	ft_lstadd_back(&objs, ft_lstnew(sphere));
 
-	sphere_center = new_vector(0, 0, 22);
-	sphere = new_sphere(sphere_center, 10, color_mixer(0, 0, 255));
+	sphere_center = new_vector(0, -5001, 0);
+	sphere = new_sphere(sphere_center, 5000, 255, 255, 0);
 	ft_lstadd_back(&objs, ft_lstnew(sphere));
 
 	cam_origin = new_vector(0, 0, 0);

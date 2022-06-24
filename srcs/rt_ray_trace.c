@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_ray_trace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 14:36:15 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/24 19:53:25 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,16 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	}
 	if (!closer)
 		return (BACKGROUND_COLOR);
-	return (closer->color);
+	t_vector *point = vec_add(scene->cams->origin, vec_mult(closer_dist, ray));
+	t_vector *normal = vec_substract(closer->center, point);
+	vec_normalize(normal);
+	t_vector *light = new_vector(10, -10, 3);
+	t_vector *vec_1 = vec_substract(light, point);
+	float n_dot = vec_dot_product(normal, vec_1);
+	float intensity = 0.2;
+	if (n_dot > 0)
+		intensity += 0.8 * n_dot / vec_length(vec_1);	
+	return (color_mixer(vec_mult(intensity, closer->cols)));
 }
 
 void	render_scene(t_data *data, t_scene *scene)

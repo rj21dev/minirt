@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 22:59:17 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/24 13:38:12 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,18 @@ typedef struct	s_vector
 	float	z;
 }		t_vector;
 
+// typedef struct	s_rgb
+// {
+// 	int	r;
+// 	int	g;
+// 	int	b;
+// }				t_rgb;
+
 typedef struct	s_sphere
 {
 	t_vector	*center;
 	float		radius;
+	t_vector	*cols;
 	int			color;
 }				t_sphere;
 
@@ -72,6 +80,8 @@ typedef struct	s_vplane
 
 t_vector	*new_vector(float x, float y, float z);
 t_vector	*vec_substract(t_vector *vec1, t_vector *vec2);
+t_vector	*vec_add(t_vector *vec1, t_vector *vec2);
+t_vector	*vec_mult(float scalar, t_vector *vec);
 float		vec_length(t_vector *vec);
 void		vec_normalize(t_vector *vec);
 float		vec_dot_product(t_vector *vec1, t_vector *vec2);
@@ -79,10 +89,12 @@ float		vec_dot_product(t_vector *vec1, t_vector *vec2);
 t_data		*init_data(int width, int height);
 
 void		error_exit(int code);
-int			color_mixer(int r, int g, int b);
+// int			color_mixer(int r, int g, int b);
+int	color_mixer(t_vector *cols);
 
 t_camera	*new_cam(t_vector *origin, t_vector *direction, float fov);
-t_sphere	*new_sphere(t_vector *center, float radius, int color);
+t_sphere	*new_sphere(t_vector *center, float radius, int r, int g, int b);
+// t_sphere	*new_sphere(t_vector *center, float radius, int color);
 t_scene		*new_scene(t_camera *cam, t_list *objs);
 
 void		render_scene(t_data *data, t_scene *scene);

@@ -26,7 +26,7 @@ $(OBJS_DIR) :
 		mkdir -p $@
 
 $(NAME):  $(OBJS_DIR) $(OBJS) $(LIB_DIR)$(LIB) Makefile
-		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS_M) -o $@
+		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS_L) -o $@
 
 $(LIB_DIR)$(LIB) : ;
 		make -C $(LIB_DIR)
@@ -42,6 +42,6 @@ fclean : clean
 re: fclean all
 
 .PHONY:
-		all clean fclean re bonus
+		all clean fclean re
 
 -include $(DEPS)
