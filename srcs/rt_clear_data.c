@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rt_clear_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:09 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/23 16:59:35 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/24 16:14:46 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
-
-void	ft_clear_split(char **str)
-{
-	int	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-			free(str[i++]);
-		free(str);
-	}
-	str = NULL;
-}
 
 void	ft_clear_camera(t_scene **scene)
 {
@@ -54,6 +40,11 @@ void	ft_clear_elements(t_scene **scene)
 		{
 			free(((t_cylinder *)(*scene)->elements->content)->point);
 			free(((t_cylinder *)(*scene)->elements->content)->or_vec);
+		}
+		if (!ft_strcmp((char *)((*scene)->id->content), PLANE))
+		{
+			free(((t_plane *)(*scene)->elements->content)->point);
+			free(((t_plane *)(*scene)->elements->content)->or_vec);
 		}
 		free((*scene)->id->content);
 		free((*scene)->elements->content);

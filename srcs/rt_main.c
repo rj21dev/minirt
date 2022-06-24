@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:23 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 21:02:35 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:11:38 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ int	main(int argc, char **argv)
 			((t_cylinder *)(elements->content))->or_vec->x, ((t_cylinder *)(elements->content))->or_vec->y, ((t_cylinder *)(elements->content))->or_vec->z, \
 			((t_cylinder *)(elements->content))->diameter, ((t_cylinder *)(elements->content))->height, \
 			((t_cylinder *)(elements->content))->color_struct.r, ((t_cylinder *)(elements->content))->color_struct.g, ((t_cylinder *)(elements->content))->color_struct.b);
+		}
+		if (!ft_strcmp((char *)(id->content), PLANE))
+		{
+			printf("Plane: %f,%f,%f %f,%f,%f %i,%i,%i\n", \
+			((t_plane *)(elements->content))->point->x, ((t_plane *)(elements->content))->point->y, ((t_plane *)(elements->content))->point->z, \
+			((t_plane *)(elements->content))->or_vec->x, ((t_plane *)(elements->content))->or_vec->y, ((t_plane *)(elements->content))->or_vec->z, \
+			((t_plane *)(elements->content))->color_struct.r, ((t_plane *)(elements->content))->color_struct.g, ((t_plane *)(elements->content))->color_struct.b);
 		}
 		elements = elements->next;
 		id = id->next;

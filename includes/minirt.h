@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 20:20:55 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/24 16:09:19 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_data
 	float	height;
 }	t_data;
 
-typedef struct	s_vector
+typedef struct s_vector
 {
 	float	x;
 	float	y;
@@ -85,10 +85,10 @@ typedef struct s_ambient
 */
 typedef struct s_light
 {
-	t_vector		*point;
-	float			brightness_ratio;
-	t_color			color;
-	unsigned long	rgb;
+	t_vector	*point;
+	float		brightness_ratio;
+	t_color		color;
+	int			rgb;
 }	t_light;
 
 /* Camera struct
@@ -138,6 +138,14 @@ typedef struct s_cylinder
 	int			color;
 }	t_cylinder;
 
+typedef struct s_plane
+{
+	t_vector	*point;
+	t_vector	*or_vec;
+	t_color		color_struct;
+	int			color;
+}	t_plane;
+
 // typedef struct	s_scene
 // {
 // 	t_camera	*cams;
@@ -145,7 +153,6 @@ typedef struct s_cylinder
 // 	float		width;
 // 	float		height;
 // }				t_scene;
-
 typedef struct s_scene
 {
 	t_camera	*cams;
@@ -158,7 +165,7 @@ typedef struct s_scene
 
 }				t_scene;
 
-typedef struct	s_vplane
+typedef struct s_vplane
 {
 	float	width;
 	float	height;
@@ -194,7 +201,7 @@ int			ft_errors_handler(char *msg);
 float		ft_atof(char *str);
 int			ft_strcmp(char const *str1, char const *str2);
 
-unsigned long	ft_get_color(int r, int g, int b);
+int			ft_get_color(int r, int g, int b);
 t_color		ft_get_color_struct(char *str);
 t_vector	*ft_get_coordiantes(char *str);
 void		ft_get_elements(char **el, t_scene **scene);
@@ -205,12 +212,12 @@ void		ft_get_light(char **elem, t_scene **scene);
 
 void		ft_get_sphere(char **elem, t_scene **scene);
 void		ft_get_cylinder(char **elem, t_scene **scene);
+void		ft_get_plane(char **elem, t_scene **scene);
 
 void		ft_clear(t_scene **scene);
-void		ft_clear_split(char **str);
 
-t_scene	*ft_init(void);
-void	ft_read_from_file(char *filename, t_scene **scene);
-void	ft_check_extension(char *file);
+t_scene		*ft_init(void);
+void		ft_read_from_file(char *filename, t_scene **scene);
+void		ft_check_extension(char *file);
 
 #endif
