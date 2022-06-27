@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/27 15:10:46 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/27 18:35:16 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,51 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	// t_sphere	*test;
 	// t_sphere	*closer;
 	t_list		*tmp;
-	t_cylinder	*test;
-	t_cylinder	*closer;
+	t_list		*tmp_elem;
+	void	*test;
+	void	*closer;
+	int		color;
+	int		color_fin;
 	// t_plane		*closer;
 	// t_plane		*test;
 
 	closer_dist = _INFINITY;
 	closer = NULL;
 	tmp = scene->elements;
-	while (tmp)
+	tmp_elem = (*scene).id;
+	color = -1;
+	while (tmp && tmp_elem)
 	{
 		test = tmp->content;
-		// if (!strcmp((char *)((*scene)->id->content), SPHERE))
-		// sphere_intersect(scene->cams, ray, test, dist);
-		cylinder_intersect(scene->cams, ray, test, dist);
-		// plane_intersect(scene->cams, ray, test, dist);
-
+		if (!strcmp((char *)tmp_elem->content, SPHERE))
+		{
+			sphere_intersect(scene->cams, ray, (t_sphere *)test, dist);
+			color = ((t_sphere *)test)->color;
+		}
+		if (!strcmp((char *)tmp_elem->content, PLANE))
+		{
+			plane_intersect(scene->cams, ray, (t_plane *)test, dist);
+			color = ((t_plane *)test)->color;
+		}
+		if (!strcmp((char *)tmp_elem->content, CYL))
+		{
+			cylinder_intersect(scene->cams, ray, ((t_cylinder *)test), dist);
+			color = ((t_cylinder *)test)->color;
+		}
 		if (dist[0] > 1 && dist[0] < closer_dist)
 		{
 			closer_dist = dist[0];
 			closer = test;
+			color_fin = color;
 		}
 		if (dist[1] > 1 && dist[1] < closer_dist)
 		{
 			closer_dist = dist[1];
 			closer = test;
+			color_fin = color;
 		}
 		tmp = tmp->next;
-		// (*scene)->id = (*scene)->id->next;
+		tmp_elem = tmp_elem->next;
 	}
 	if (!closer)
 		return (BACKGROUND_COLOR);
@@ -81,7 +98,7 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	// free(normal);
 	// free(vec_1);
 	// free(mult);
-	return (closer->color);
+	return (color_fin);
 }
 
 void	render_scene(t_data *data, t_scene *scene)
