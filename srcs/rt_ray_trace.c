@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_ray_trace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/25 00:03:05 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/27 14:35:21 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,25 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 {
 	float		dist[2];
 	float		closer_dist;
-	t_sphere	*test;
-	t_sphere	*closer;
+	// t_sphere	*test;
+	// t_sphere	*closer;
 	t_list		*tmp;
-	
+	// t_cylinder	*test;
+	// t_cylinder	*closer;
+	t_plane		*closer;
+	t_plane		*test;
+
 	closer_dist = _INFINITY;
 	closer = NULL;
 	tmp = scene->elements;
 	while (tmp)
 	{
 		test = tmp->content;
-		//if (!strcmp((char *)((*scene)->id->content), SPHERE))
-		sphere_intersect(scene->cams, ray, test, dist);
+		// if (!strcmp((char *)((*scene)->id->content), SPHERE))
+		// sphere_intersect(scene->cams, ray, test, dist);
+		// cylinder_intersect(scene->cams, ray, test, dist);
+		plane_intersect(scene->cams, ray, test, dist);
+
 		if (dist[0] > 1 && dist[0] < closer_dist)
 		{
 			closer_dist = dist[0];
@@ -56,25 +63,25 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	}
 	if (!closer)
 		return (BACKGROUND_COLOR);
-	t_vector *mult = vec_mult(closer_dist, ray);
-	t_vector *point = vec_add(scene->cams->origin, mult);
-	t_vector *normal = vec_substract(closer->center, point);
-	vec_normalize(normal);
-	// t_vector *light = new_vector(10, -10, 3);
-	t_vector *vec_1 = vec_substract(scene->light->point, point);
-	float n_dot = vec_dot_product(normal, vec_1);
-	float intensity = 0;
-	intensity += scene->ambient->lighting_ratio;
-	if (n_dot > 0)
-		intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_1);
-	t_vector *cols = col_mult(intensity, closer->color_struct);
-	int color = color_mixer(cols);
-	free(cols);
-	free(point);
-	free(normal);
-	free(vec_1);
-	free(mult);
-	return (color);
+	// t_vector *mult = vec_mult(closer_dist, ray);
+	// t_vector *point = vec_add(scene->cams->origin, mult);
+	// t_vector *normal = vec_substract(closer->center, point);
+	// vec_normalize(normal);
+	// // t_vector *light = new_vector(10, -10, 3);
+	// t_vector *vec_1 = vec_substract(scene->light->point, point);
+	// float n_dot = vec_dot_product(normal, vec_1);
+	// float intensity = 0;
+	// intensity += scene->ambient->lighting_ratio;
+	// if (n_dot > 0)
+	// 	intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_1);
+	// t_vector *cols = col_mult(intensity, closer->color_struct);
+	// int color = color_mixer(cols);
+	// free(cols);
+	// free(point);
+	// free(normal);
+	// free(vec_1);
+	// free(mult);
+	return (closer->color);
 }
 
 void	render_scene(t_data *data, t_scene *scene)

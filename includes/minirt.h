@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/24 23:58:45 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/26 21:57:15 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@
 # define SPHERE	"sphere"
 # define PLANE	"plane"
 # define CYL	"cyl"
+
+typedef struct s_abc
+{
+	float	a;
+	float	b;
+	float	c;
+}		t_abc;
 
 typedef struct s_data
 {
@@ -177,6 +184,8 @@ void		render_scene(t_data *data, t_scene *scene);
 t_vplane	*get_view_plane(float width, float height, float fov);
 // void		sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist1, float *dist2);
 void		sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist);
+void	cylinder_intersect(t_camera *cam, t_vector *ray, t_cylinder *cyl, float *dist);
+void	plane_intersect(t_camera *cam, t_vector *ray, t_plane *plane, float *dist);
 
 int			close_win(t_data *data);
 
