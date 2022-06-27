@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 19:34:41 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/27 16:34:37 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/27 17:22:50 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	cylinder_intersect(t_camera *cam, t_vector *ray, t_cylinder *cyl, float *di
 	oc = vec_substract(cam->origin, cyl->point);
 	tmp->a = vec_dot_product(ray, ray) - powf(vec_dot_product(ray, cyl->or_vec), 2);
 	tmp->b = 2 * (vec_dot_product(ray, oc) - (vec_dot_product(ray, cyl->or_vec) * vec_dot_product(oc, cyl->or_vec)));
-	tmp->c = vec_dot_product(cyl->or_vec, cyl->or_vec) - powf(vec_dot_product(oc, cyl->or_vec), 2) - (cyl->diameter / 2) * (cyl->diameter / 2);
+	tmp->c = vec_dot_product(oc, oc) - powf(vec_dot_product(oc, cyl->or_vec), 2) - (cyl->diameter / 2) * (cyl->diameter / 2);
 	discr = ft_find_discr(tmp->a, tmp->b, tmp->c);
 	if (discr < 0)
 	{
