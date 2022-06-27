@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 13:25:27 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/24 16:41:56 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/27 16:33:06 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_get_cylinder(char **elem, t_scene **scene)
 		ft_errors_handler(ORIENTATION_VECTOR_ERR);
 	cylinder->diameter = ft_atof(elem[3]);
 	cylinder->height = ft_atof(elem[4]);
+	printf("diam: %f, h: %f\n", cylinder->diameter, cylinder->height);
 	cylinder->color_struct = ft_get_color_struct(elem[5]);
 	cylinder->color = ft_get_color(cylinder->color_struct.r, \
 	cylinder->color_struct.g, cylinder->color_struct.b);
