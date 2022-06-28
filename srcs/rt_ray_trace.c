@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 16:30:34 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:43:28 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	}
 }
 
-static int	ray_trace(t_vector *ray, t_scene *scene)
+void	ft_objects_intersect(t_vector *ray, t_scene *scene, \
+float *closer_dist, t_list **closer)
 {
-	float		dist;
-	float		closer_dist;
 	t_list		*tmp;
-	void	*test;
-	t_list	*closer;
+	float		dist;
+	void		*test;
 
-	closer_dist = _INFINITY;
-	closer = NULL;
 	tmp = scene->elements;
 	while (tmp)
 	{
@@ -45,13 +42,23 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 			plane_intersect(scene->cams, ray, (t_plane *)test, &dist);
 		if (tmp->obj_id == CYL)
 			cylinder_intersect(scene->cams, ray, ((t_cylinder *)test), &dist);
-		if (dist > 1 && dist < closer_dist)
+		if (dist > 1 && dist < *closer_dist)
 		{
-			closer_dist = dist;
-			closer = tmp;
+			*closer_dist = dist;
+			*closer = tmp;
 		}
 		tmp = tmp->next;
 	}
+}
+
+static int	ray_trace(t_vector *ray, t_scene *scene)
+{
+	float	closer_dist;
+	t_list	*closer;
+
+	closer_dist = _INFINITY;
+	closer = NULL;
+	ft_objects_intersect(ray, scene, &closer_dist, &closer);
 	if (!closer)
 		return (BACKGROUND_COLOR);
 	t_vector *mult = vec_mult(closer_dist, ray);
