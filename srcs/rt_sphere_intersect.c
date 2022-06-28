@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rt_sphere_intersect.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:39 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 11:53:09 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/28 15:17:11 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-static float	min_f(float a, float b)
+float	min_f(float a, float b)
 {
 	if (a < b)
 		return (a);

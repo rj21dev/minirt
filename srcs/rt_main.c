@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:23 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/27 20:29:05 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/28 15:08:35 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char **argv)
 	ft_read_from_file(argv[1], &scene);
 
 	data = init_data();
-
 /*	// DEBUG_PRINT Parser!!!
 	if (scene->elements && scene->id)
 		printf("size: %i, %i\n", ft_lstsize(scene->elements), ft_lstsize(scene->id));

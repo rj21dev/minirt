@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/27 16:28:58 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:18:41 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ typedef struct s_abc
 	float	b;
 	float	c;
 }		t_abc;
+
+typedef struct s_root
+{
+	float	root_1;
+	float	root_2;
+}	t_root;
 
 typedef struct s_data
 {
@@ -216,4 +222,5 @@ t_scene		*ft_init(void);
 void		ft_read_from_file(char *filename, t_scene **scene);
 void		ft_check_extension(char *file);
 
+float	min_f(float a, float b);
 #endif

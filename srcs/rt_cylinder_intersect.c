@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_cylinder_intersect.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 19:34:41 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/28 11:55:55 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/28 15:21:25 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,9 @@ void	ft_check_height_cyl(t_vector *d, t_vector *x, t_cylinder *cyl, float *dist)
 {
 	float	z;
 
-	z = vec_dot_product(d, cyl->or_vec) * dist[0] + vec_dot_product(x, cyl->or_vec);
+	z = vec_dot_product(d, cyl->or_vec) * (*dist) + vec_dot_product(x, cyl->or_vec);
 	if (z < 0 || z > cyl->height)
 		dist[0] = _INFINITY;
-	z = vec_dot_product(d, cyl->or_vec) * dist[1] + vec_dot_product(x, cyl->or_vec);
-	if (z < 0 || z > cyl->height)
-		dist[1] = _INFINITY;
 }
 
 // https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
@@ -46,21 +43,32 @@ void	ft_check_height_cyl(t_vector *d, t_vector *x, t_cylinder *cyl, float *dist)
 void	cylinder_intersect(t_camera *cam, t_vector *ray, t_cylinder *cyl, float *dist)
 {
 	t_vector	*oc;
-	t_abc	*tmp = malloc(sizeof(t_abc));
+	t_abc	*tmp;
 	float	discr;
+	t_root	*root;
+
+	tmp = malloc(sizeof(t_abc));
+	root = malloc(sizeof(t_root));
+	if (!root || !tmp)
+		ft_errors_handler(strerror(errno));
 	oc = vec_substract(cam->origin, cyl->point);
-	tmp->a = vec_dot_product(ray, ray) - powf(vec_dot_product(ray, cyl->or_vec), 2);
-	tmp->b = 2 * (vec_dot_product(ray, oc) - (vec_dot_product(ray, cyl->or_vec) * vec_dot_product(oc, cyl->or_vec)));
-	tmp->c = vec_dot_product(oc, oc) - powf(vec_dot_product(oc, cyl->or_vec), 2) - (cyl->diameter / 2) * (cyl->diameter / 2);
+	tmp->a = vec_dot_product(ray, ray) - \
+	powf(vec_dot_product(ray, cyl->or_vec), 2);
+	tmp->b = 2 * (vec_dot_product(ray, oc) - \
+	(vec_dot_product(ray, cyl->or_vec) * vec_dot_product(oc, cyl->or_vec)));
+	tmp->c = vec_dot_product(oc, oc) - \
+	powf(vec_dot_product(oc, cyl->or_vec), 2) - powf(cyl->diameter / 2, 2);
 	discr = ft_find_discr(tmp->a, tmp->b, tmp->c);
 	if (discr < 0)
 	{
 		*dist = _INFINITY;
 		return ;
 	}
-	dist[0] = (-tmp->b - sqrt(discr)) / (2 * tmp->a);
-	dist[1] = (-tmp->b + sqrt(discr)) / (2 * tmp->a);
+	root->root_1 = (-tmp->b - sqrt(discr)) / (2 * tmp->a);
+	root->root_2 = (-tmp->b + sqrt(discr)) / (2 * tmp->a);
+	*dist = min_f(root->root_1, root->root_2);
 	ft_check_height_cyl(ray, oc, cyl, dist);
 	free(oc);
+	free(tmp);
 }
 
