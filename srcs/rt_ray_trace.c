@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_ray_trace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 16:30:34 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 17:13:31 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,48 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	}
 }
 
+float compute_light(t_list *closer, float closer_dist, t_vector *ray, t_scene *scene)
+{
+	t_vector *mult;
+	t_vector *point;
+	t_vector *normal;
+	t_vector *vec_l;
+	t_vector *vec_r;
+	t_vector *view;
+	float n_dot;
+	float r_dot_v;
+	float intensity;
+
+	mult = vec_mult(closer_dist, ray);
+	point = vec_add(scene->cams->origin, mult);
+	if (closer->obj_id == 1)
+		normal = vec_substract(((t_sphere *)(closer->content))->center, point);
+	if (closer->obj_id == 2)
+		normal = ((t_plane *)closer->content)->or_vec;
+	if (closer->obj_id == 3)
+		normal = ((t_cylinder *)closer->content)->or_vec;
+	vec_normalize(normal);
+	vec_l = vec_substract(scene->light->point, point);
+	n_dot = vec_dot_product(normal, vec_l);
+	intensity = 0;
+	intensity += scene->ambient->lighting_ratio;
+	if (n_dot > 0)
+		intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_l);
+	vec_r = vec_substract(vec_mult(2 * vec_dot_product(normal, vec_l), normal), vec_l);
+	view = vec_mult(-1, ray);
+	r_dot_v = vec_dot_product(vec_r, view);
+	if (r_dot_v > 0)
+		intensity += scene->light->brightness_ratio * pow(r_dot_v / vec_length(vec_r), 50);
+	return (intensity);
+	free(mult);
+	free(point);
+	if (closer->obj_id == 1)
+		free(normal);
+	free(vec_l);
+	free(vec_r);
+	free(view);
+}
+
 static int	ray_trace(t_vector *ray, t_scene *scene)
 {
 	float		dist;
@@ -32,6 +74,7 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	t_list		*tmp;
 	void	*test;
 	t_list	*closer;
+	float	intensity;
 
 	closer_dist = _INFINITY;
 	closer = NULL;
@@ -54,22 +97,7 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	}
 	if (!closer)
 		return (BACKGROUND_COLOR);
-	t_vector *mult = vec_mult(closer_dist, ray);
-	t_vector *point = vec_add(scene->cams->origin, mult);
-	t_vector *normal;
-	if (closer->obj_id == 1)
-		normal = vec_substract(((t_sphere *)(closer->content))->center, point);
-	if (closer->obj_id == 2)
-		normal = ((t_plane *)closer->content)->or_vec;
-	if (closer->obj_id == 3)
-		normal = ((t_cylinder *)closer->content)->or_vec;
-	vec_normalize(normal);
-	t_vector *vec_1 = vec_substract(scene->light->point, point);
-	float n_dot = vec_dot_product(normal, vec_1);
-	float intensity = 0;
-	intensity += scene->ambient->lighting_ratio;
-	if (n_dot > 0)
-		intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_1);
+	intensity = compute_light(closer, closer_dist, ray, scene);
 	t_vector *cols;
 	if (closer->obj_id == 1)
 		cols = col_mult(intensity, ((t_sphere *)closer->content)->color_struct);
@@ -79,10 +107,6 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 		cols = col_mult(intensity, ((t_cylinder *)closer->content)->color_struct);
 	int color = color_mixer(cols);
 	free(cols);
-	free(point);
-	// free(normal); //в цидиндре и плоскости малочится не тут!!!
-	free(vec_1);
-	free(mult);
 	return (color);
 }
 
