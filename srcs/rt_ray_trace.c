@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 16:06:40 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:30:34 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	float		closer_dist;
 	t_list		*tmp;
 	void	*test;
-	void	*closer;
-	int		obj_id;
+	t_list	*closer;
 
 	closer_dist = _INFINITY;
 	closer = NULL;
@@ -40,17 +39,16 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	while (tmp)
 	{
 		test = tmp->content;
-		obj_id = tmp->obj_id;
-		if (obj_id == SPHERE)
+		if (tmp->obj_id == SPHERE)
 			sphere_intersect(scene->cams, ray, (t_sphere *)test, &dist);
-		if (obj_id == PLANE)
+		if (tmp->obj_id == PLANE)
 			plane_intersect(scene->cams, ray, (t_plane *)test, &dist);
-		if (obj_id == CYL)
+		if (tmp->obj_id == CYL)
 			cylinder_intersect(scene->cams, ray, ((t_cylinder *)test), &dist);
 		if (dist > 1 && dist < closer_dist)
 		{
 			closer_dist = dist;
-			closer = test;
+			closer = tmp;
 		}
 		tmp = tmp->next;
 	}
@@ -59,12 +57,12 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	t_vector *mult = vec_mult(closer_dist, ray);
 	t_vector *point = vec_add(scene->cams->origin, mult);
 	t_vector *normal;
-	if (obj_id == 1)
-		normal = vec_substract(((t_sphere *)closer)->center, point);
-	if (obj_id == 2)
-		normal = ((t_plane *)closer)->or_vec;
-	if (obj_id == 3)
-		normal = ((t_cylinder *)closer)->or_vec;
+	if (closer->obj_id == 1)
+		normal = vec_substract(((t_sphere *)(closer->content))->center, point);
+	if (closer->obj_id == 2)
+		normal = ((t_plane *)closer->content)->or_vec;
+	if (closer->obj_id == 3)
+		normal = ((t_cylinder *)closer->content)->or_vec;
 	vec_normalize(normal);
 	t_vector *vec_1 = vec_substract(scene->light->point, point);
 	float n_dot = vec_dot_product(normal, vec_1);
@@ -73,12 +71,12 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	if (n_dot > 0)
 		intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_1);
 	t_vector *cols;
-	if (obj_id == 1)
-		cols = col_mult(intensity, ((t_sphere *)closer)->color_struct);
-	if (obj_id == 2)
-		cols = col_mult(intensity, ((t_plane *)closer)->color_struct);
-	if (obj_id == 3)
-		cols = col_mult(intensity, ((t_cylinder *)closer)->color_struct);
+	if (closer->obj_id == 1)
+		cols = col_mult(intensity, ((t_sphere *)closer->content)->color_struct);
+	if (closer->obj_id == 2)
+		cols = col_mult(intensity, ((t_plane *)closer->content)->color_struct);
+	if (closer->obj_id == 3)
+		cols = col_mult(intensity, ((t_cylinder *)closer->content)->color_struct);
 	int color = color_mixer(cols);
 	free(cols);
 	free(point);
