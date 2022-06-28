@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_ray_trace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/27 18:35:16 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 12:30:14 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,78 +27,76 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 static int	ray_trace(t_vector *ray, t_scene *scene)
 {
-	float		dist[2];
+	float		dist;
 	float		closer_dist;
-	// t_sphere	*test;
-	// t_sphere	*closer;
 	t_list		*tmp;
 	t_list		*tmp_elem;
 	void	*test;
 	void	*closer;
-	int		color;
-	int		color_fin;
-	// t_plane		*closer;
-	// t_plane		*test;
+	int		obj_id;
 
 	closer_dist = _INFINITY;
 	closer = NULL;
 	tmp = scene->elements;
 	tmp_elem = (*scene).id;
-	color = -1;
 	while (tmp && tmp_elem)
 	{
 		test = tmp->content;
 		if (!strcmp((char *)tmp_elem->content, SPHERE))
 		{
-			sphere_intersect(scene->cams, ray, (t_sphere *)test, dist);
-			color = ((t_sphere *)test)->color;
+			sphere_intersect(scene->cams, ray, (t_sphere *)test, &dist);
+			obj_id = 1;
 		}
 		if (!strcmp((char *)tmp_elem->content, PLANE))
 		{
-			plane_intersect(scene->cams, ray, (t_plane *)test, dist);
-			color = ((t_plane *)test)->color;
+			plane_intersect(scene->cams, ray, (t_plane *)test, &dist);
+			obj_id = 2;
 		}
 		if (!strcmp((char *)tmp_elem->content, CYL))
 		{
-			cylinder_intersect(scene->cams, ray, ((t_cylinder *)test), dist);
-			color = ((t_cylinder *)test)->color;
+			cylinder_intersect(scene->cams, ray, ((t_cylinder *)test), &dist);
+			obj_id = 3;
 		}
-		if (dist[0] > 1 && dist[0] < closer_dist)
+		if (dist > 1 && dist < closer_dist)
 		{
-			closer_dist = dist[0];
+			closer_dist = dist;
 			closer = test;
-			color_fin = color;
-		}
-		if (dist[1] > 1 && dist[1] < closer_dist)
-		{
-			closer_dist = dist[1];
-			closer = test;
-			color_fin = color;
 		}
 		tmp = tmp->next;
 		tmp_elem = tmp_elem->next;
 	}
 	if (!closer)
 		return (BACKGROUND_COLOR);
-	// t_vector *mult = vec_mult(closer_dist, ray);
-	// t_vector *point = vec_add(scene->cams->origin, mult);
-	// t_vector *normal = vec_substract(closer->center, point);
-	// vec_normalize(normal);
-	// // t_vector *light = new_vector(10, -10, 3);
-	// t_vector *vec_1 = vec_substract(scene->light->point, point);
-	// float n_dot = vec_dot_product(normal, vec_1);
-	// float intensity = 0;
-	// intensity += scene->ambient->lighting_ratio;
-	// if (n_dot > 0)
-	// 	intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_1);
-	// t_vector *cols = col_mult(intensity, closer->color_struct);
-	// int color = color_mixer(cols);
-	// free(cols);
-	// free(point);
-	// free(normal);
-	// free(vec_1);
-	// free(mult);
-	return (color_fin);
+	t_vector *mult = vec_mult(closer_dist, ray);
+	t_vector *point = vec_add(scene->cams->origin, mult);
+	t_vector *normal;
+	if (obj_id == 1)
+		normal = vec_substract(((t_sphere *)closer)->center, point);
+	if (obj_id == 2)
+		normal = ((t_plane *)closer)->or_vec;
+	if (obj_id == 3)
+		normal = ((t_cylinder *)closer)->or_vec;
+	vec_normalize(normal);
+	t_vector *vec_1 = vec_substract(scene->light->point, point);
+	float n_dot = vec_dot_product(normal, vec_1);
+	float intensity = 0;
+	intensity += scene->ambient->lighting_ratio;
+	if (n_dot > 0)
+		intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_1);
+	t_vector *cols;
+	if (obj_id == 1)
+		cols = col_mult(intensity, ((t_sphere *)closer)->color_struct);
+	if (obj_id == 2)
+		cols = col_mult(intensity, ((t_plane *)closer)->color_struct);
+	if (obj_id == 3)
+		cols = col_mult(intensity, ((t_cylinder *)closer)->color_struct);
+	int color = color_mixer(cols);
+	free(cols);
+	free(point);
+	// free(normal); //в цидиндре и плоскости малочится не тут!!!
+	free(vec_1);
+	free(mult);
+	return (color);
 }
 
 void	render_scene(t_data *data, t_scene *scene)

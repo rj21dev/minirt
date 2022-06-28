@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_cylinder_intersect.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 19:34:41 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/27 18:27:50 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 11:55:55 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ void	cylinder_intersect(t_camera *cam, t_vector *ray, t_cylinder *cyl, float *di
 	discr = ft_find_discr(tmp->a, tmp->b, tmp->c);
 	if (discr < 0)
 	{
-		dist[0] = _INFINITY;
-		dist[1] = _INFINITY;
+		*dist = _INFINITY;
 		return ;
 	}
 	dist[0] = (-tmp->b - sqrt(discr)) / (2 * tmp->a);
