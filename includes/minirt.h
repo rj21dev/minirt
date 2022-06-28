@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 16:01:29 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 17:26:11 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,12 +184,11 @@ t_data		*init_data(void);
 
 int			color_mixer(t_vector *cols);
 
+int			ray_trace(t_vector *ray, t_scene *scene);
 void		render_scene(t_data *data, t_scene *scene);
-t_vplane	*get_view_plane(float width, float height, float fov);
-// void		sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist1, float *dist2);
 void		sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist);
-void	cylinder_intersect(t_camera *cam, t_vector *ray, t_cylinder *cyl, float *dist);
-void	plane_intersect(t_camera *cam, t_vector *ray, t_plane *plane, float *dist);
+void		cylinder_intersect(t_camera *cam, t_vector *ray, t_cylinder *cyl, float *dist);
+void		plane_intersect(t_camera *cam, t_vector *ray, t_plane *plane, float *dist);
 
 int			close_win(t_data *data);
 

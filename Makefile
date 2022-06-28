@@ -5,7 +5,7 @@ INCS_DIR	= includes
 
 SRCS_F		= rt_main.c rt_ray_trace.c rt_sphere_intersect.c rt_utils.c rt_vector.c rt_init_data.c rt_events_handlers.c \
 				rt_parser.c rt_errors.c rt_get_elements.c rt_get_required_elements.c rt_get_objects.c rt_parser_utils.c \
-				rt_clear_data.c rt_vector2.c \
+				rt_clear_data.c rt_vector2.c rt_render_scene.c \
 				rt_cylinder_intersect.c \
 				rt_plane_intersect.c
 
