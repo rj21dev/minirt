@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 19:25:42 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/23 19:54:53 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:04:06 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 typedef struct s_list
 {
 	void			*content;
+	int				obj_id;
 	struct s_list	*next;
 }	t_list;
 
@@ -93,7 +94,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstprint(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_list	*ft_lstnew(void *content);
+t_list	*ft_lstnew(void *content, int obj_id);
 int		ft_lstsize(t_list *lst);
 
 #endif

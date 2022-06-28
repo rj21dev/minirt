@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 13:25:27 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/27 17:23:36 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:04:26 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	ft_get_sphere(char **elem, t_scene **scene)
 	sphere->color_struct = ft_get_color_struct(elem[3]);
 	sphere->color = ft_get_color(sphere->color_struct.r, \
 	sphere->color_struct.g, sphere->color_struct.b);
-	ft_lstadd_back(&(*scene)->elements, ft_lstnew((void *)sphere));
-	ft_lstadd_back(&(*scene)->id, ft_lstnew((void *)ft_strdup(SPHERE)));
+	ft_lstadd_back(&(*scene)->elements, ft_lstnew((void *)sphere, SPHERE));
 }
 
 void	ft_get_cylinder(char **elem, t_scene **scene)
@@ -45,9 +44,8 @@ void	ft_get_cylinder(char **elem, t_scene **scene)
 	cylinder->color_struct = ft_get_color_struct(elem[5]);
 	cylinder->color = ft_get_color(cylinder->color_struct.r, \
 	cylinder->color_struct.g, cylinder->color_struct.b);
-	obj = ft_lstnew((void *)cylinder);
+	obj = ft_lstnew((void *)cylinder, CYL);
 	ft_lstadd_back(&((*scene)->elements), obj);
-	ft_lstadd_back(&((*scene)->id), ft_lstnew((void *)ft_strdup(CYL)));
 }
 
 void	ft_get_plane(char **elem, t_scene **scene)
@@ -65,7 +63,6 @@ void	ft_get_plane(char **elem, t_scene **scene)
 	plane->color_struct = ft_get_color_struct(elem[3]);
 	plane->color = ft_get_color(plane->color_struct.r, \
 	plane->color_struct.g, plane->color_struct.b);
-	obj = ft_lstnew((void *)plane);
+	obj = ft_lstnew((void *)plane, PLANE);
 	ft_lstadd_back(&((*scene)->elements), obj);
-	ft_lstadd_back(&((*scene)->id), ft_lstnew((void *)ft_strdup(PLANE)));
 }

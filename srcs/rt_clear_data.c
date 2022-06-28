@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:14:09 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/24 16:14:46 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:08:23 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,21 @@ void	ft_clear_elements(t_scene **scene)
 
 	while ((*scene)->elements)
 	{
-		if (!ft_strcmp((char *)((*scene)->id->content), SPHERE))
+		if ((*scene)->elements->obj_id == SPHERE)
 			free(((t_sphere *)(*scene)->elements->content)->center);
-		if (!ft_strcmp((char *)((*scene)->id->content), CYL))
+		if ((*scene)->elements->obj_id == CYL)
 		{
 			free(((t_cylinder *)(*scene)->elements->content)->point);
 			free(((t_cylinder *)(*scene)->elements->content)->or_vec);
 		}
-		if (!ft_strcmp((char *)((*scene)->id->content), PLANE))
+		if ((*scene)->elements->obj_id == PLANE)
 		{
 			free(((t_plane *)(*scene)->elements->content)->point);
 			free(((t_plane *)(*scene)->elements->content)->or_vec);
 		}
-		free((*scene)->id->content);
 		free((*scene)->elements->content);
 		tmp = (*scene)->elements;
 		(*scene)->elements = (*scene)->elements->next;
-		free(tmp);
-		tmp = (*scene)->id;
-		(*scene)->id = (*scene)->id->next;
 		free(tmp);
 	}
 }

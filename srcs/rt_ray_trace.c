@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 15:51:15 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:06:40 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	float		dist;
 	float		closer_dist;
 	t_list		*tmp;
-	t_list		*tmp_elem;
 	void	*test;
 	void	*closer;
 	int		obj_id;
@@ -38,32 +37,22 @@ static int	ray_trace(t_vector *ray, t_scene *scene)
 	closer_dist = _INFINITY;
 	closer = NULL;
 	tmp = scene->elements;
-	tmp_elem = (*scene).id;
-	while (tmp && tmp_elem)
+	while (tmp)
 	{
 		test = tmp->content;
-		if (!strcmp((char *)tmp_elem->content, SPHERE))
-		{
+		obj_id = tmp->obj_id;
+		if (obj_id == SPHERE)
 			sphere_intersect(scene->cams, ray, (t_sphere *)test, &dist);
-			obj_id = 1;
-		}
-		if (!strcmp((char *)tmp_elem->content, PLANE))
-		{
+		if (obj_id == PLANE)
 			plane_intersect(scene->cams, ray, (t_plane *)test, &dist);
-			obj_id = 2;
-		}
-		if (!strcmp((char *)tmp_elem->content, CYL))
-		{
+		if (obj_id == CYL)
 			cylinder_intersect(scene->cams, ray, ((t_cylinder *)test), &dist);
-			obj_id = 3;
-		}
 		if (dist > 1 && dist < closer_dist)
 		{
 			closer_dist = dist;
 			closer = test;
 		}
 		tmp = tmp->next;
-		tmp_elem = tmp_elem->next;
 	}
 	if (!closer)
 		return (BACKGROUND_COLOR);

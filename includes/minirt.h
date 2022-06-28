@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 15:18:41 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/28 16:01:29 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@
 /*end color*/
 # define NONE        "\033[0m"
 
-# define SPHERE	"sphere"
-# define PLANE	"plane"
-# define CYL	"cyl"
+# define SPHERE	1
+# define PLANE	2
+# define CYL	3
 
 typedef struct s_abc
 {
@@ -161,8 +161,6 @@ typedef struct s_scene
 	t_ambient	*ambient;
 	t_light		*light;
 	t_list		*elements; //list, where element is one of the stucts: t_sphere, t_plane, t_cylinder;
-	t_list		*id;
-
 }				t_scene;
 
 typedef struct s_vplane
