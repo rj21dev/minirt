@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_plane_intersect.c                               :+:      :+:    :+:   */
+/*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 21:40:05 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/29 17:43:15 by coverand         ###   ########.fr       */
+/*   Created: 2022/06/30 15:14:35 by coverand          #+#    #+#             */
+/*   Updated: 2022/06/30 15:33:22 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#ifndef KEYS_H
+# define KEYS_H
 
-void	plane_intersect(t_camera *cam, t_vector *ray, \
-t_plane *plane, float *dist)
-{
-	t_vector	*oc;
-	float		denom;	
+// x, y, z buttons
+# define X_ROTATE_KEY	7
+# define Y_ROTATE_KEY	6
+# define Z_ROTATE_KEY	16
 
-	denom = (vec_dot_product(ray, plane->or_vec));
-	if (denom == 0)
-	{
-		*dist = _INFINITY;
-		return ;
-	}
-	oc = vec_substract(cam->origin, plane->point);
-	*dist = -(vec_dot_product(oc, plane->or_vec)) / denom;
-	free(oc);
-}
+# define KEY_ESC		53
+
+# define KEY_W			13
+# define KEY_S			1
+# define KEY_A			0
+# define KEY_D			2
+
+# define KEY_UP			126
+# define KEY_DOWN		125
+# define KEY_LEFT		123
+# define KEY_RIGHT		124
+
+#endif

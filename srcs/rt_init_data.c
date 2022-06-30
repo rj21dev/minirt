@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:58:25 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/24 23:58:28 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/30 16:45:59 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,5 @@ t_data	*init_data(void)
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Ray Tracer");
 	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->len, &data->endian);
-	// data->width = width;
-	// data->height = height;
 	return (data);
 }
