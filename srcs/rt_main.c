@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:23 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/30 14:32:09 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:37:46 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(int argc, char **argv)
 		elements = elements->next;
 		id = id->next;
 	}*/
-	printf("ambient ratio: %f\n", data->scene->ambient->lighting_ratio);
 	render_scene(data, scene);
 	mlx_key_hook(data->win_ptr, key_hook, (void *)data);
 	mlx_hook(data->win_ptr, 17, 0, close_win, data);

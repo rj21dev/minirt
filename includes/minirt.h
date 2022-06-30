@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/30 14:31:23 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/30 15:30:13 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "../libft/libft.h"
+# include "keys.h"
 # include <mlx.h>
 # include <math.h>
 # include <errno.h>
@@ -42,6 +43,10 @@
 # define SPHERE	1
 # define PLANE	2
 # define CYL	3
+
+# define X_ROTATION_ANGLE	5
+# define Y_ROTATION_ANGLE	5
+# define Z_ROTATION_ANGLE	5
 
 typedef struct s_abc
 {
@@ -220,8 +225,12 @@ t_scene		*ft_init(void);
 void		ft_read_from_file(char *filename, t_scene **scene);
 void		ft_check_extension(char *file);
 
-float	min_f(float a, float b);
+float		min_f(float a, float b);
 
-int	key_hook(int key, void *param);
+/* File key_hook.c */
+int			key_hook(int key, void *param);
+
+/* File rt_rotation.c */
+void		ft_rotate_objects(t_data *data, int key);
 
 #endif
