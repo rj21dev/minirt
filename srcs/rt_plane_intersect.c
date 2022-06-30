@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rt_plane_intersect.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 21:40:05 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/29 17:43:15 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:57:16 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	plane_intersect(t_camera *cam, t_vector *ray, \
+void	plane_intersect(t_vector *or, t_vector *ray, \
 t_plane *plane, float *dist)
 {
 	t_vector	*oc;
@@ -24,7 +24,7 @@ t_plane *plane, float *dist)
 		*dist = _INFINITY;
 		return ;
 	}
-	oc = vec_substract(cam->origin, plane->point);
+	oc = vec_substract(or, plane->point);
 	*dist = -(vec_dot_product(oc, plane->or_vec)) / denom;
 	free(oc);
 }

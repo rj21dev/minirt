@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_sphere_intersect.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:39 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 15:17:11 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:58:36 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	min_f(float a, float b)
 	return (b);
 }
 
-void	sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist)
+void	sphere_intersect(t_vector *or, t_vector *dr, t_sphere *sphere, float *dist)
 {
 	float		b;
 	float		c;
@@ -28,8 +28,8 @@ void	sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dis
 	float		discr;
 	t_vector	*cam_sphere;
 
-	cam_sphere = vec_substract(cam->origin, sphere->center);
-	b = 2 * vec_dot_product(cam_sphere, ray);
+	cam_sphere = vec_substract(or, sphere->center);
+	b = 2 * vec_dot_product(cam_sphere, dr);
 	c = vec_dot_product(cam_sphere, cam_sphere) - sphere->radius * sphere->radius;
 	discr = b * b - 4 * c;
 	free(cam_sphere);

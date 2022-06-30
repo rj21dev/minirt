@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_cylinder_intersect.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 19:34:41 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/29 17:40:16 by coverand         ###   ########.fr       */
+/*   Updated: 2022/06/30 17:05:01 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_abc	*ft_find_cylinder_coeffs(t_vector *ray, t_vector *oc, t_cylinder *cyl)
 	V - is a unit length vector that determines cylinder's axis
 	r - is the cylinder's radius
 */
-void	cylinder_intersect(t_camera *cam, t_vector *ray, \
+void	cylinder_intersect(t_vector *or, t_vector *ray, \
 t_cylinder *cyl, float *dist)
 {
 	t_vector	*oc;
@@ -79,7 +79,7 @@ t_cylinder *cyl, float *dist)
 	root = malloc(sizeof(t_root));
 	if (!root)
 		ft_errors_handler(strerror(errno));
-	oc = vec_substract(cam->origin, cyl->point);
+	oc = vec_substract(or, cyl->point);
 	tmp = ft_find_cylinder_coeffs(ray, oc, cyl);
 	discr = ft_find_discr(tmp->a, tmp->b, tmp->c);
 	if (discr < 0)
@@ -94,4 +94,3 @@ t_cylinder *cyl, float *dist)
 	ft_check_height_cyl(ray, oc, cyl, dist);
 	ft_free_cylinder_help(oc, tmp, root);
 }
-
