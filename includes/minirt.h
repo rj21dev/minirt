@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 17:26:11 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/30 14:31:23 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,6 @@ typedef struct s_root
 	float	root_1;
 	float	root_2;
 }	t_root;
-
-typedef struct s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		len;
-	int		endian;
-	float	width;
-	float	height;
-}	t_data;
 
 typedef struct s_vector
 {
@@ -171,6 +158,20 @@ typedef struct s_vplane
 	float	y_pixel;
 }				t_vplane;
 
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		len;
+	int		endian;
+	float	width;
+	float	height;
+	t_scene	*scene;
+}	t_data;
+
 t_vector	*new_vector(float x, float y, float z);
 t_vector	*vec_substract(t_vector *vec1, t_vector *vec2);
 t_vector	*vec_add(t_vector *vec1, t_vector *vec2);
@@ -220,4 +221,7 @@ void		ft_read_from_file(char *filename, t_scene **scene);
 void		ft_check_extension(char *file);
 
 float	min_f(float a, float b);
+
+int	key_hook(int key, void *param);
+
 #endif

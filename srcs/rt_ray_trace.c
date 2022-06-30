@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_ray_trace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:46 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 17:25:18 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/30 14:15:23 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static float compute_light(t_list *closer, float closer_dist, t_vector *ray, t_s
 	t_vector *vec_l;
 	t_vector *vec_r;
 	t_vector *view;
+	t_vector *tmp;
 	float n_dot;
 	float r_dot_v;
 	float intensity;
@@ -65,19 +66,21 @@ static float compute_light(t_list *closer, float closer_dist, t_vector *ray, t_s
 	intensity += scene->ambient->lighting_ratio;
 	if (n_dot > 0)
 		intensity += scene->light->brightness_ratio * n_dot / vec_length(vec_l);
-	vec_r = vec_substract(vec_mult(2 * vec_dot_product(normal, vec_l), normal), vec_l);
+	tmp = vec_mult(2 * vec_dot_product(normal, vec_l), normal);
+	vec_r = vec_substract(tmp, vec_l);
 	view = vec_mult(-1, ray);
 	r_dot_v = vec_dot_product(vec_r, view);
 	if (r_dot_v > 0)
 		intensity += scene->light->brightness_ratio * pow(r_dot_v / vec_length(vec_r), 50);
-	return (intensity);
 	free(mult);
 	free(point);
 	if (closer->obj_id == 1)
 		free(normal);
 	free(vec_l);
+	free(tmp);
 	free(vec_r);
 	free(view);
+	return (intensity);
 }
 
 int	ray_trace(t_vector *ray, t_scene *scene)
