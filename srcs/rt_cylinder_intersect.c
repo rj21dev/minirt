@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_cylinder_intersect.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 19:34:41 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/30 17:05:01 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/30 18:08:30 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,22 @@ t_cylinder *cyl, float *dist)
 {
 	float	z;
 
-	z = vec_dot_product(d, cyl->or_vec) * (*dist) + \
+	z = vec_dot_product(d, cyl->or_vec) * dist[0] + \
 	vec_dot_product(x, cyl->or_vec);
 	if (z < 0 || z > cyl->height)
 		dist[0] = _INFINITY;
+	z = vec_dot_product(d, cyl->or_vec) * dist[1] + \
+	vec_dot_product(x, cyl->or_vec);
+	if (z < 0 || z > cyl->height)
+		dist[1] = _INFINITY;
 }
 
-void	ft_free_cylinder_help(t_vector *oc, t_abc *tmp, t_root *root)
+void	ft_free_cylinder_help(t_vector *oc, t_abc *tmp)
 {
 	if (oc)
 		free(oc);
 	if (tmp)
 		free(tmp);
-	if (root)
-		free(root);
 }
 
 t_abc	*ft_find_cylinder_coeffs(t_vector *ray, t_vector *oc, t_cylinder *cyl)
@@ -74,23 +76,19 @@ t_cylinder *cyl, float *dist)
 	t_vector	*oc;
 	t_abc		*tmp;
 	float		discr;
-	t_root		*root;
 
-	root = malloc(sizeof(t_root));
-	if (!root)
-		ft_errors_handler(strerror(errno));
 	oc = vec_substract(or, cyl->point);
 	tmp = ft_find_cylinder_coeffs(ray, oc, cyl);
 	discr = ft_find_discr(tmp->a, tmp->b, tmp->c);
 	if (discr < 0)
 	{
-		ft_free_cylinder_help(oc, tmp, root);
-		*dist = _INFINITY;
+		ft_free_cylinder_help(oc, tmp);
+		dist[0] = _INFINITY;
+		dist[1] = _INFINITY;
 		return ;
 	}
-	root->root_1 = (-tmp->b - sqrt(discr)) / (2 * tmp->a);
-	root->root_2 = (-tmp->b + sqrt(discr)) / (2 * tmp->a);
-	*dist = min_f(root->root_1, root->root_2);
+	dist[0] = (-tmp->b - sqrt(discr)) / (2 * tmp->a);
+	dist[1] = (-tmp->b + sqrt(discr)) / (2 * tmp->a);
 	ft_check_height_cyl(ray, oc, cyl, dist);
-	ft_free_cylinder_help(oc, tmp, root);
+	ft_free_cylinder_help(oc, tmp);
 }

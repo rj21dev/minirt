@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_sphere_intersect.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:39 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/30 16:58:36 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/30 18:12:54 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	sphere_intersect(t_vector *or, t_vector *dr, t_sphere *sphere, float *dist)
 {
 	float		b;
 	float		c;
-	float		root_1;
-	float		root_2;
+	// float		root_1;
+	// float		root_2;
 	float		discr;
 	t_vector	*cam_sphere;
 
@@ -35,10 +35,11 @@ void	sphere_intersect(t_vector *or, t_vector *dr, t_sphere *sphere, float *dist)
 	free(cam_sphere);
 	if (discr < 0)
 	{
-		*dist = _INFINITY;
+		dist[0] = _INFINITY;
+		dist[1] = _INFINITY;
 		return ;
 	}
-	root_1 = (b * (-1) - sqrt(discr)) / 2;
-	root_2 = (b * (-1) + sqrt(discr)) / 2;
-	*dist = min_f(root_1, root_2);
+	dist[0] = (b * (-1) - sqrt(discr)) / 2;
+	dist[1] = (b * (-1) + sqrt(discr)) / 2;
+	// *dist = min_f(root_1, root_2);
 }

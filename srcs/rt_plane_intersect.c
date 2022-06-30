@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_plane_intersect.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 21:40:05 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/30 16:57:16 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/30 18:09:06 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ t_plane *plane, float *dist)
 	t_vector	*oc;
 	float		denom;	
 
+	dist[1] = _INFINITY;
 	denom = (vec_dot_product(ray, plane->or_vec));
 	if (denom == 0)
 	{
-		*dist = _INFINITY;
+		dist[0] = _INFINITY;
 		return ;
 	}
 	oc = vec_substract(or, plane->point);
-	*dist = -(vec_dot_product(oc, plane->or_vec)) / denom;
+	dist[0] = -(vec_dot_product(oc, plane->or_vec)) / denom;
 	free(oc);
 }
