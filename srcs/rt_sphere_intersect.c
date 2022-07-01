@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_sphere_intersect.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:39 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/30 18:12:54 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/01 18:43:57 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ float	min_f(float a, float b)
 	return (b);
 }
 
-void	sphere_intersect(t_vector *or, t_vector *dr, t_sphere *sphere, float *dist)
+void	sphere_intersect(t_vector or, t_vector dr, t_sphere *sphere, float *dist)
 {
 	float		b;
 	float		c;
 	// float		root_1;
 	// float		root_2;
 	float		discr;
-	t_vector	*cam_sphere;
+	t_vector	cam_sphere;
 
 	cam_sphere = vec_substract(or, sphere->center);
 	b = 2 * vec_dot_product(cam_sphere, dr);
 	c = vec_dot_product(cam_sphere, cam_sphere) - sphere->radius * sphere->radius;
 	discr = b * b - 4 * c;
-	free(cam_sphere);
+	// free(cam_sphere);
 	if (discr < 0)
 	{
 		dist[0] = _INFINITY;

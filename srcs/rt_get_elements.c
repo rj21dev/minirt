@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_get_elements.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:01:31 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/24 16:45:11 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/01 18:36:55 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ t_color	ft_get_color_struct(char *str)
 	return (color);
 }
 
-t_vector	*ft_get_coordiantes(char *str)
+t_vector	ft_get_coordiantes(char *str)
 {
 	char		**tmp;
-	t_vector	*point;
+	t_vector	point;
 
-	point = malloc(sizeof(t_vector));
-	if (!point)
-		ft_errors_handler(strerror(errno));
+	// point = malloc(sizeof(t_vector));
+	// if (!point)
+	// 	ft_errors_handler(strerror(errno));
 	tmp = ft_split(str, ',');
 	if (tmp[0] && tmp[1] && tmp[2] && !tmp[3])
 	{
-		point->x = ft_atof(tmp[0]);
-		point->y = ft_atof(tmp[1]);
-		point->z = ft_atof(tmp[2]);
+		point.x = ft_atof(tmp[0]);
+		point.y = ft_atof(tmp[1]);
+		point.z = ft_atof(tmp[2]);
 	}
 	else
 		ft_errors_handler(MAP_ERROR_WRONG_INP);
@@ -62,10 +62,10 @@ t_vector	*ft_get_coordiantes(char *str)
 	return (point);
 }
 
-int	ft_orientation_vector_check(t_vector *point)
+int	ft_orientation_vector_check(t_vector point)
 {
-	if (point->x > 1.0 || point->y > 1.0 || point->z > 1.0 || \
-	point->x < -1.0 || point->y < -1.0 || point->z < -1.0)
+	if (point.x > 1.0 || point.y > 1.0 || point.z > 1.0 || \
+	point.x < -1.0 || point.y < -1.0 || point.z < -1.0)
 		return (1);
 	return (0);
 }

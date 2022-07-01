@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/30 17:03:06 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/01 22:08:21 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct s_color2
+{
+	float	red;
+	float	green;
+	float	blue;
+}				t_color2;
+
 /* Ambient lightning struct
 * lighting_ratio - ambient lighting ratio in range [0.0,1.0]
 */
@@ -92,7 +99,7 @@ typedef struct s_ambient
 */
 typedef struct s_light
 {
-	t_vector	*point;
+	t_vector	point;
 	float		brightness_ratio;
 	t_color		color;
 	int			rgb;
@@ -105,8 +112,8 @@ typedef struct s_light
 */
 typedef struct s_camera
 {
-	t_vector	*origin;
-	t_vector	*direction;
+	t_vector	origin;
+	t_vector	direction;
 	float		fov;
 }				t_camera;
 
@@ -116,7 +123,7 @@ typedef struct s_camera
 */
 typedef struct s_sphere
 {
-	t_vector	*center;
+	t_vector	center;
 	float		radius;
 	t_color		color_struct;
 	int			color;
@@ -129,8 +136,8 @@ typedef struct s_sphere
 */
 typedef struct s_cylinder
 {
-	t_vector	*point;
-	t_vector	*or_vec;
+	t_vector	point;
+	t_vector	or_vec;
 	float		diameter;
 	float		height;
 	t_color		color_struct;
@@ -139,8 +146,8 @@ typedef struct s_cylinder
 
 typedef struct s_plane
 {
-	t_vector	*point;
-	t_vector	*or_vec;
+	t_vector	point;
+	t_vector	or_vec;
 	t_color		color_struct;
 	int			color;
 }	t_plane;
@@ -177,28 +184,28 @@ typedef struct s_data
 	t_scene	*scene;
 }	t_data;
 
-t_vector	*new_vector(float x, float y, float z);
-t_vector	*vec_substract(t_vector *vec1, t_vector *vec2);
-t_vector	*vec_add(t_vector *vec1, t_vector *vec2);
-t_vector	*vec_mult(float scalar, t_vector *vec);
-t_vector	*col_mult(float scalar, t_color col_struct);
-float		vec_length(t_vector *vec);
-float		vec_dot_product(t_vector *vec1, t_vector *vec2);
+t_vector	new_vector(float x, float y, float z);
+t_vector	vec_substract(t_vector vec1, t_vector vec2);
+t_vector	vec_add(t_vector vec1, t_vector vec2);
+t_vector	vec_mult(float scalar, t_vector vec);
+t_vector	col_mult(float scalar, t_color col_struct);
+float		vec_length(t_vector vec);
+float		vec_dot_product(t_vector vec1, t_vector vec2);
 void		vec_normalize(t_vector *vec);
 
 t_data		*init_data(void);
 
-int			color_mixer(t_vector *cols);
+int			color_mixer(t_vector cols);
 
-int			ray_trace(t_vector *ray, t_scene *scene);
+int			ray_trace(t_vector ray, t_scene *scene);
 void		render_scene(t_data *data, t_scene *scene);
 
 // void		sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist);
 // void		cylinder_intersect(t_camera *cam, t_vector *ray, t_cylinder *cyl, float *dist);
 // void		plane_intersect(t_camera *cam, t_vector *ray, t_plane *plane, float *dist);
-void		sphere_intersect(t_vector *or, t_vector *ray, t_sphere *sphere, float *dist);
-void		cylinder_intersect(t_vector *or, t_vector *ray, t_cylinder *cyl, float *dist);
-void		plane_intersect(t_vector *or, t_vector *ray, t_plane *plane, float *dist);
+void		sphere_intersect(t_vector or, t_vector ray, t_sphere *sphere, float *dist);
+void		cylinder_intersect(t_vector or, t_vector ray, t_cylinder *cyl, float *dist);
+void		plane_intersect(t_vector or, t_vector ray, t_plane *plane, float *dist);
 
 int			close_win(t_data *data);
 
@@ -211,8 +218,8 @@ int			ft_strcmp(char const *str1, char const *str2);
 
 int			ft_get_color(int r, int g, int b);
 t_color		ft_get_color_struct(char *str);
-t_vector	*ft_get_coordiantes(char *str);
-int			ft_orientation_vector_check(t_vector *point);
+t_vector	ft_get_coordiantes(char *str);
+int			ft_orientation_vector_check(t_vector point);
 void		ft_get_elements(char **el, t_scene **scene);
 
 void		ft_get_ambient_lightning(char **elem, t_scene **scene);

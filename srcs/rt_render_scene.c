@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_render_scene.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 17:23:21 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 17:24:18 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/01 22:10:01 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	render_scene(t_data *data, t_scene *scene)
 	float		x_vp;
 	float		y_vp;
 	int			color;
-	t_vector	*ray;
+	t_vector	ray;
 	t_vplane	*vp;
 
 	vp = get_view_plane(scene->width, scene->height, scene->cams->fov);
@@ -57,10 +57,9 @@ void	render_scene(t_data *data, t_scene *scene)
 		while (x_vp <= WIDTH / 2)
 		{
 			ray = new_vector(x_vp * vp->x_pixel, y_vp * vp->y_pixel, 1);
-			vec_normalize(ray);
+			vec_normalize(&ray);
 			color = ray_trace(ray, scene);
 			my_mlx_pixel_put(data, x_vp, y_vp, color);
-			free(ray);
 			x_vp++;
 		}
 		y_vp--;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_rotation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:27:59 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/30 15:29:46 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/01 18:58:07 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_z_rotation(t_vector *point, float angle)
 
 void	ft_rotate_objects(t_data *data, int key)
 {
-	t_vector	*point;
+	t_vector	point;
 
 	if (data->scene->elements && (data->scene->elements->obj_id == CYL || \
 	data->scene->elements->obj_id == PLANE))
@@ -51,10 +51,10 @@ void	ft_rotate_objects(t_data *data, int key)
 		if (data->scene->elements->obj_id == PLANE)
 			point = ((t_plane *)(data->scene->elements->content))->or_vec;
 		if (key == X_ROTATE_KEY)
-			ft_x_rotation(point, X_ROTATION_ANGLE * M_PI / 180);
+			ft_x_rotation(&point, X_ROTATION_ANGLE * M_PI / 180);
 		if (key == Y_ROTATE_KEY)
-			ft_y_rotation(point, Y_ROTATION_ANGLE * M_PI / 180);
+			ft_y_rotation(&point, Y_ROTATION_ANGLE * M_PI / 180);
 		if (key == Z_ROTATE_KEY)
-			ft_z_rotation(point, Z_ROTATION_ANGLE * M_PI / 180);
+			ft_z_rotation(&point, Z_ROTATION_ANGLE * M_PI / 180);
 	}
 }
