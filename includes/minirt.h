@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/01 22:08:21 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/02 10:57:06 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct s_vplane
 	float	y_pixel;
 }				t_vplane;
 
-typedef struct s_data
+typedef struct	s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -182,28 +182,45 @@ typedef struct s_data
 	float	width;
 	float	height;
 	t_scene	*scene;
-}	t_data;
+}				t_data;
+
+typedef struct	s_matrix
+{
+	float	r[4][3];
+}				t_matrix;
+
+typedef struct	s_ray
+{
+	t_vector	origin;
+	t_vector	direction;
+}				t_ray;
 
 t_vector	new_vector(float x, float y, float z);
 t_vector	vec_substract(t_vector vec1, t_vector vec2);
 t_vector	vec_add(t_vector vec1, t_vector vec2);
 t_vector	vec_mult(float scalar, t_vector vec);
-t_vector	col_mult(float scalar, t_color col_struct);
-float		vec_length(t_vector vec);
+t_vector	vec_cross_prod(t_vector vec1, t_vector vec2);
 float		vec_dot_product(t_vector vec1, t_vector vec2);
+float		vec_length(t_vector vec);
 void		vec_normalize(t_vector *vec);
+
+t_vector	col_mult(float scalar, t_color col_struct);
+
+t_matrix	look_at(t_vector origin, t_vector direction);
+t_vector	mult_by_matrix(t_vector p, t_matrix m);
+t_ray	ray_to_pixel(int x, int y, t_scene *scene);
 
 t_data		*init_data(void);
 
 int			color_mixer(t_vector cols);
 
-int			ray_trace(t_vector ray, t_scene *scene);
+int			ray_trace(t_ray ray, t_scene *scene);
 void		render_scene(t_data *data, t_scene *scene);
 
 // void		sphere_intersect(t_camera *cam, t_vector *ray, t_sphere *sphere, float *dist);
 // void		cylinder_intersect(t_camera *cam, t_vector *ray, t_cylinder *cyl, float *dist);
 // void		plane_intersect(t_camera *cam, t_vector *ray, t_plane *plane, float *dist);
-void		sphere_intersect(t_vector or, t_vector ray, t_sphere *sphere, float *dist);
+void		sphere_intersect(t_ray ray, t_sphere *sphere, float *dist);
 void		cylinder_intersect(t_vector or, t_vector ray, t_cylinder *cyl, float *dist);
 void		plane_intersect(t_vector or, t_vector ray, t_plane *plane, float *dist);
 

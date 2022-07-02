@@ -9,7 +9,7 @@ SRCS_F		= rt_main.c rt_ray_trace.c rt_sphere_intersect.c rt_utils.c rt_vector.c 
 				rt_cylinder_intersect.c \
 				rt_plane_intersect.c \
 				key_hook.c \
-				rt_rotation.c
+				rt_rotation.c rt_ray.c rt_matrix_rot.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
 OBJS_F		= $(patsubst %.c, %.o, $(SRCS_F))
