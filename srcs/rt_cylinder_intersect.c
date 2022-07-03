@@ -6,54 +6,41 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 19:34:41 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/01 18:51:55 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/03 17:02:45 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-float	ft_find_discr(float a, float b, float c)
+static void	check_dist(double *dist, t_cylinder cylinder, t_ray ray)
 {
-	return (powf(b, 2) - 4 * c * a);
+	t_v3	q;
+	t_v3	p2;
+
+	p2 = vec_add(cylinder.point, vec_mult(cylinder.or_vec, cylinder.height));
+	q = vec_add(ray.origin, vec_mult(ray.direction, *dist));
+	if (dot_prod(cylinder.or_vec, vec_sub(q, cylinder.point)) <= 0)
+		*dist = -1;
+	if (dot_prod(cylinder.or_vec, vec_sub(q, p2)) >= 0)
+		*dist = -1;
 }
 
-void	ft_check_height_cyl(t_vector d, t_vector x, \
-t_cylinder *cyl, float *dist)
+static int	cyl_get_roots(double *d, t_cylinder cyl, t_ray ray)
 {
-	float	z;
+	t_v3	a_sqrt;
+	t_v3	right;
+	double	a;
+	double	b;
+	double	c;
 
-	z = vec_dot_product(d, cyl->or_vec) * dist[0] + \
-	vec_dot_product(x, cyl->or_vec);
-	if (z < 0 || z > cyl->height)
-		dist[0] = _INFINITY;
-	z = vec_dot_product(d, cyl->or_vec) * dist[1] + \
-	vec_dot_product(x, cyl->or_vec);
-	if (z < 0 || z > cyl->height)
-		dist[1] = _INFINITY;
-}
-
-// void	ft_free_cylinder_help(t_vector oc, t_abc *tmp)
-// {
-// 	if (oc)
-// 		free(oc);
-// 	if (tmp)
-// 		free(tmp);
-// }
-
-t_abc	ft_find_cylinder_coeffs(t_vector ray, t_vector oc, t_cylinder *cyl)
-{
-	t_abc	tmp;
-
-	// tmp = malloc(sizeof(t_abc));
-	// if (!tmp)
-	// 	ft_errors_handler(strerror(errno));
-	tmp.a = vec_dot_product(ray, ray) - \
-	powf(vec_dot_product(ray, cyl->or_vec), 2);
-	tmp.b = 2 * (vec_dot_product(ray, oc) - \
-	(vec_dot_product(ray, cyl->or_vec) * vec_dot_product(oc, cyl->or_vec)));
-	tmp.c = vec_dot_product(oc, oc) - \
-	powf(vec_dot_product(oc, cyl->or_vec), 2) - powf(cyl->diameter / 2, 2);
-	return (tmp);
+	a_sqrt = vec_sub(ray.direction, vec_mult(cyl.or_vec, dot_prod(ray.direction, cyl.or_vec)));
+	a = dot_prod(a_sqrt, a_sqrt);
+	right = vec_sub(vec_sub(ray.origin, cyl.point), vec_mult(cyl.or_vec, dot_prod(vec_sub(ray.origin, cyl.point), cyl.or_vec)));
+	b = 2 * dot_prod(a_sqrt, right);
+	c = dot_prod(right, right) - cyl.radius * cyl.radius;
+	if (!solve_quadratic(new_abc(a, b, c), &d[0], &d[1]))
+		return (0);
+	return (1);
 }
 
 // https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
@@ -70,25 +57,29 @@ t_abc	ft_find_cylinder_coeffs(t_vector ray, t_vector oc, t_cylinder *cyl)
 	V - is a unit length vector that determines cylinder's axis
 	r - is the cylinder's radius
 */
-void	cylinder_intersect(t_vector or, t_vector ray, \
-t_cylinder *cyl, float *dist)
+int	cylinder_intersect(t_ray ray, t_cylinder cylinder, double *dist)
 {
-	t_vector	oc;
-	t_abc		tmp;
-	float		discr;
+	double	d[2];
 
-	oc = vec_substract(or, cyl->point);
-	tmp = ft_find_cylinder_coeffs(ray, oc, cyl);
-	discr = ft_find_discr(tmp.a, tmp.b, tmp.c);
-	if (discr < 0)
+	if (!cyl_get_roots(d, cylinder, ray))
+		return (0);
+	if (d[0] > 0)
+		check_dist(&d[0], cylinder, ray);
+	if (d[1] > 0)
+		check_dist(&d[1], cylinder, ray);
+	if (d[0] < 0 && d[1] < 0)
+		return (0);
+	if (d[1] < d[0])
+		if (d[1] > 0)
+			*dist = d[1];
+	else
+			*dist = d[0];
+	else
 	{
-		// ft_free_cylinder_help(oc, tmp);
-		dist[0] = _INFINITY;
-		dist[1] = _INFINITY;
-		return ;
+		if (d[0] > 0)
+			*dist = d[0];
+		else
+			*dist = d[1];
 	}
-	dist[0] = (-tmp.b - sqrt(discr)) / (2 * tmp.a);
-	dist[1] = (-tmp.b + sqrt(discr)) / (2 * tmp.a);
-	ft_check_height_cyl(ray, oc, cyl, dist);
-	// ft_free_cylinder_help(oc, tmp);
+	return (1);
 }

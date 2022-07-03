@@ -6,49 +6,41 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:01:31 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/01 18:36:55 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/03 14:48:00 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int	ft_get_color(int r, int g, int b)
+t_color2	ft_get_color_struct(char *str)
 {
-	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
-}
-
-t_color	ft_get_color_struct(char *str)
-{
-	t_color	color;
+	t_color2	color;
 	char	**tmp;
 
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
+	color.red = 0;
+	color.green = 0;
+	color.blue = 0;
 	tmp = ft_split(str, ',');
 	if (tmp[0] && tmp[1] && tmp[2] && !tmp[3])
 	{
-		color.r = ft_atoi(tmp[0]);
-		color.g = ft_atoi(tmp[1]);
-		color.b = ft_atoi(tmp[2]);
+		color.red = ft_atoi(tmp[0]) / 256.f;
+		color.green = ft_atoi(tmp[1]) / 256.f;
+		color.blue = ft_atoi(tmp[2]) / 256.f;
 	}
 	else
 		ft_errors_handler(MAP_ERROR_WRONG_INP);
 	ft_split_free(tmp);
-	if (color.r > 255 || color.g > 255 || color.b > 255 || \
-	color.r < 0 || color.g < 0 || color.b < 0)
+	if (color.red > 255 || color.green > 255 || color.blue > 255 || \
+	color.red < 0 || color.green < 0 || color.blue < 0)
 		ft_errors_handler(RGB_COLORS_RANGE_ERR);
 	return (color);
 }
 
-t_vector	ft_get_coordiantes(char *str)
+t_v3	ft_get_coordiantes(char *str)
 {
 	char		**tmp;
-	t_vector	point;
+	t_v3	point;
 
-	// point = malloc(sizeof(t_vector));
-	// if (!point)
-	// 	ft_errors_handler(strerror(errno));
 	tmp = ft_split(str, ',');
 	if (tmp[0] && tmp[1] && tmp[2] && !tmp[3])
 	{
@@ -62,7 +54,7 @@ t_vector	ft_get_coordiantes(char *str)
 	return (point);
 }
 
-int	ft_orientation_vector_check(t_vector point)
+int	ft_orientation_vector_check(t_v3 point)
 {
 	if (point.x > 1.0 || point.y > 1.0 || point.z > 1.0 || \
 	point.x < -1.0 || point.y < -1.0 || point.z < -1.0)

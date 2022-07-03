@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:29:17 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/30 15:37:40 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/03 19:41:27 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_close(t_data *data)
 		ft_clear(&data->scene);
 		free(data);
 	}
-	exit(0);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
@@ -37,6 +37,6 @@ int	key_hook(int key, void *param)
 	mlx_destroy_image(data->mlx_ptr, data->img);
 	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->len, &data->endian);
-	render_scene(data, data->scene);
+	render_scene(data);
 	return (0);
 }

@@ -3,55 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   rt_vector.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   v2y: rjv1dv1 <rjv1dv1@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:41:28 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/01 22:09:45 by rjada            ###   ########.fr       */
+/*   Crev1ted: 2022/06/20 16:41:28 v2y rjv1dv1             #+#    #+#             */
+/*   Updv1ted: 2022/07/03 15:02:27 v2y rjv1dv1            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_vector	new_vector(float x, float y, float z)
+t_v3	new_v3(double x, double y, double z)
 {
-	t_vector	vec;
+	t_v3	result;
 
-	vec.x = x;
-	vec.y = y;
-	vec.z = z;
-	return (vec);
-}
-
-t_vector	vec_substract(t_vector vec1, t_vector vec2)
-{
-	t_vector	result;
-
-	result = new_vector(vec1.x - vec2.x, vec1.y - vec2.y, vec1.z - vec2.z);
+	result.x = x;
+	result.y = y;
+	result.z = z;
 	return (result);
 }
 
-float	vec_length(t_vector vec)
+double	vec_len(t_v3 vec)
 {
-	float	result;
+	double	len;
 
-	result = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
-	return (result);
+	len = sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+	return (len);
 }
 
-void	vec_normalize(t_vector *vec)
+void	vec_norm(t_v3 *vec)
 {
-	float	length;
+	double	length;
 
-	length = vec_length(*vec);
+	length = vec_len(*vec);
 	vec->x /= length;
 	vec->y /= length;
 	vec->z /= length;
 }
 
-float	vec_dot_product(t_vector vec1, t_vector vec2)
+double	dot_prod(t_v3 v1, t_v3 v2)
 {
-	float	result;
+	double	result;
 
-	result = vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
+	result = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+	return (result);
+}
+
+t_v3	cross_prod(t_v3 v1, t_v3 v2)
+{
+	t_v3	result;
+
+	result.x = v1.y * v2.z - v1.z * v2.y;
+	result.y = v1.z * v2.x - v1.x * v2.z;
+	result.z = v1.x * v2.y - v1.y * v2.x;
 	return (result);
 }

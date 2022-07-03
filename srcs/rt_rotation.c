@@ -6,13 +6,13 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:27:59 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/01 18:58:07 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/03 19:50:04 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-static void	ft_x_rotation(t_vector *point, float angle)
+void	ft_x_rotation(t_v3 *point, float angle)
 {
 	float	tmp_y;
 
@@ -21,7 +21,7 @@ static void	ft_x_rotation(t_vector *point, float angle)
 	point->z = -tmp_y * sinf(angle) + point->z * cosf(angle);
 }
 
-static void	ft_y_rotation(t_vector *point, float angle)
+void	ft_y_rotation(t_v3 *point, float angle)
 {
 	float	tmp_x;
 
@@ -30,7 +30,7 @@ static void	ft_y_rotation(t_vector *point, float angle)
 	point->z = -tmp_x * sinf(angle) + point->z * cosf(angle);
 }
 
-static void	ft_z_rotation(t_vector *point, float angle)
+void	ft_z_rotation(t_v3 *point, float angle)
 {
 	float	tmp_x;
 
@@ -41,7 +41,9 @@ static void	ft_z_rotation(t_vector *point, float angle)
 
 void	ft_rotate_objects(t_data *data, int key)
 {
-	t_vector	point;
+	(void)data;
+	(void)key;
+	/*t_v3	point;
 
 	if (data->scene->elements && (data->scene->elements->obj_id == CYL || \
 	data->scene->elements->obj_id == PLANE))
@@ -56,5 +58,5 @@ void	ft_rotate_objects(t_data *data, int key)
 			ft_y_rotation(&point, Y_ROTATION_ANGLE * M_PI / 180);
 		if (key == Z_ROTATE_KEY)
 			ft_z_rotation(&point, Z_ROTATION_ANGLE * M_PI / 180);
-	}
+	}*/
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:15:20 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/28 16:09:50 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/03 00:00:04 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	last = NULL;
 	while (lst)
 	{
-		node = ft_lstnew((*f)(lst->content), lst->obj_id);
+		node = ft_lstnew((*f)(lst->content));
 		if (!node)
 			if (new_list)
 				ft_lstclear(&new_list, del);

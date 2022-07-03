@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_get_required_elements.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 12:59:40 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/24 16:39:39 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/03 14:36:50 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_get_ambient_lightning(char **elem, t_scene **scene)
 	(*scene)->ambient->lighting_ratio < 0.0)
 		ft_errors_handler(AMBIENT_RATIO_RANGE_ER);
 	(*scene)->ambient->color = ft_get_color_struct(elem[2]);
-	(*scene)->ambient->rgb = ft_get_color((*scene)->ambient->color.r, \
-	(*scene)->ambient->color.g, (*scene)->ambient->color.b);
 }
 
 void	ft_get_camera(char **elem, t_scene **scene)
@@ -52,11 +50,9 @@ void	ft_get_light(char **elem, t_scene **scene)
 	if (!(*scene)->light)
 		ft_errors_handler(strerror(errno));
 	(*scene)->light->point = ft_get_coordiantes(elem[1]);
-	(*scene)->light->brightness_ratio = ft_atof(elem[2]);
-	if ((*scene)->light->brightness_ratio > 1.0 || \
-	(*scene)->light->brightness_ratio < 0.0)
+	(*scene)->light->intensity = ft_atof(elem[2]);
+	if ((*scene)->light->intensity > 1.0 || \
+	(*scene)->light->intensity < 0.0)
 		ft_errors_handler(BRIGHTNESS_RATIO_RANGE);
 	(*scene)->light->color = ft_get_color_struct(elem[3]);
-	(*scene)->light->rgb = ft_get_color((*scene)->light->color.r, \
-	(*scene)->light->color.g, (*scene)->light->color.b);
 }

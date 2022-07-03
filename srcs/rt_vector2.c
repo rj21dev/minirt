@@ -6,42 +6,38 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 23:04:39 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/01 22:44:43 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/03 15:50:23 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_vector	vec_add(t_vector vec1, t_vector vec2)
+t_v3	vec_sub(t_v3 vec1, t_v3 vec2)
 {
-	t_vector	result;
+	t_v3	result;
 
-	result = new_vector(vec1.x + vec2.x, vec1.y + vec2.y, vec1.z + vec2.z);
+	result.x = vec1.x - vec2.x;
+	result.y = vec1.y - vec2.y;
+	result.z = vec1.z - vec2.z;
 	return (result);
 }
 
-t_vector	col_mult(float scalar, t_color col_struct)
+t_v3	vec_add(t_v3 vec1, t_v3 vec2)
 {
-	t_vector	result;
+	t_v3	result;
 
-	result = new_vector(scalar * col_struct.r, scalar * col_struct.g, scalar * col_struct.b);
+	result.x = vec1.x + vec2.x;
+	result.y = vec1.y + vec2.y;
+	result.z = vec1.z + vec2.z;
 	return (result);
 }
 
-t_vector	vec_mult(float scalar, t_vector vec)
+t_v3	vec_mult(t_v3 vec, double scalar)
 {
-	t_vector	result;
+	t_v3	result;
 
-	result = new_vector(scalar * vec.x, scalar * vec.y, scalar * vec.z);
-	return (result);
-}
-
-t_vector	vec_cross_prod(t_vector vec1, t_vector vec2)
-{
-	t_vector	result;
-
-	result.x = vec1.y * vec2.z - vec1.z * vec2.y;
-	result.y = vec1.z * vec2.x - vec1.x * vec2.z;
-	result.z = vec1.x * vec2.y - vec1.y * vec2.x;
+	result.x = vec.x * scalar;
+	result.y = vec.y * scalar;
+	result.z = vec.z * scalar;
 	return (result);
 }

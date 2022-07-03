@@ -6,26 +6,23 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 21:40:05 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/01 18:52:25 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/03 17:10:48 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-void	plane_intersect(t_vector or, t_vector ray, \
-t_plane *plane, float *dist)
+int	plane_intersect(t_ray ray, t_plane plane, double *dist)
 {
-	t_vector	oc;
-	float		denom;	
+	t_v3	oc;
+	double	denom;
 
-	dist[1] = _INFINITY;
-	denom = (vec_dot_product(ray, plane->or_vec));
-	if (denom == 0)
+	denom = dot_prod(plane.or_vec, ray.direction);
+	if (fabs(denom) > 1e-6)
 	{
-		dist[0] = _INFINITY;
-		return ;
+		oc = vec_sub(plane.point, ray.origin);
+		*dist = dot_prod(oc, plane.or_vec) / denom;
+		return (*dist >= 0);
 	}
-	oc = vec_substract(or, plane->point);
-	dist[0] = -(vec_dot_product(oc, plane->or_vec)) / denom;
-	// free(oc);
+	return (0);
 }

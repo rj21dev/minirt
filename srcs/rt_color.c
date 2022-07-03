@@ -1,37 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_utils.c                                         :+:      :+:    :+:   */
+/*   rt_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:32 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/01 18:39:49 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/03 17:36:03 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-static int ft_min(int a, int b)
+t_color	int_to_color(int color)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	t_int_color	a;
+	t_color		rtn;
+
+	a.integer = color;
+	rtn.red = a.comps[2];
+	rtn.green = a.comps[1];
+	rtn.blue = a.comps[0];
+	return (rtn);
 }
 
-static int ft_max(int a, int b)
+int	color_to_int(t_color color)
 {
-	if (a > b)
-		return (a);
-	return (b);
+	t_int_color	a;
+
+	a.comps[2] = color.red;
+	a.comps[1] = color.green;
+	a.comps[0] = color.blue;
+	return (a.integer);
 }
 
-static int clamp(int col)
+t_color2	int_color(int color)
 {
-	return (ft_min(255, ft_max(0, col)));
-}
+	t_color		tmp;
+	t_color2	rtn;
 
-int	color_mixer(t_vector cols)
-{
-	return (clamp((int)cols.x) << 16 | clamp((int)cols.y) << 8 | clamp((int)cols.z));
+	tmp = int_to_color(color);
+	rtn.red = (float)tmp.red / 256;
+	rtn.green = (float)tmp.green / 256;
+	rtn.blue = (float)tmp.blue / 256;
+	return (rtn);
 }

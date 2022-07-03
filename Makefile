@@ -1,15 +1,31 @@
-NAME		= minirt
+NAME		= miniRT
 SRCS_DIR	= srcs/
 OBJS_DIR	= objs/
 INCS_DIR	= includes
 
-SRCS_F		= rt_main.c rt_ray_trace.c rt_sphere_intersect.c rt_utils.c rt_vector.c rt_init_data.c rt_events_handlers.c \
-				rt_parser.c rt_errors.c rt_get_elements.c rt_get_required_elements.c rt_get_objects.c rt_parser_utils.c \
-				rt_clear_data.c rt_vector2.c rt_render_scene.c \
-				rt_cylinder_intersect.c \
-				rt_plane_intersect.c \
-				key_hook.c \
-				rt_rotation.c rt_ray.c rt_matrix_rot.c
+SRCS_F = rt_main.c	\
+		rt_parser.c \
+		rt_errors.c \
+		rt_get_elements.c \
+		rt_get_objects.c \
+		rt_get_required_elements.c \
+		rt_parser_utils.c \
+		rt_vector.c \
+		rt_vector2.c \
+		rt_color.c \
+		rt_color2.c \
+		rt_render_scene.c \
+		rt_init_data.c \
+		rt_get_normal.c \
+		rt_quad_solve.c \
+		rt_cylinder_intersect.c \
+		rt_sphere_intersect.c \
+		rt_plane_intersect.c \
+		rt_get_ray.c \
+		rt_shader.c \
+		rt_clear_data.c \
+		rt_rotation.c \
+		key_hook.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
 OBJS_F		= $(patsubst %.c, %.o, $(SRCS_F))
@@ -36,15 +52,15 @@ $(NAME):  $(OBJS_DIR) $(OBJS) $(LIB_DIR)$(LIB) Makefile
 		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS_L) -o $@
 
 $(LIB_DIR)$(LIB) : ;
-		make -C $(LIB_DIR)
+		@make --no-print-directory -C $(LIB_DIR)
 
 clean :
-	rm -rf $(OBJS_DIR)
-	make clean -C $(LIB_DIR)
+	@rm -rf $(OBJS_DIR)
+	@make clean --no-print-directory -C $(LIB_DIR)
 
 fclean : clean
-	rm -f $(NAME)
-	make fclean -C $(LIB_DIR)
+	@rm -f $(NAME)
+	@make fclean --no-print-directory -C $(LIB_DIR)
 
 re: fclean all
 

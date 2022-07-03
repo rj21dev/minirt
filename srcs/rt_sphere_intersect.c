@@ -6,39 +6,41 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:41:39 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/02 10:54:30 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/03 17:05:09 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-float	min_f(float a, float b)
+static int	get_roots(double *t0, double *t1, t_ray ray, t_sphere sphere)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	t_v3	l;
+	double	a;
+	double	b;
+	double	c;
+
+	l = vec_sub(ray.origin, sphere.center);
+	a = dot_prod(ray.direction, ray.direction);
+	b = 2.0 * dot_prod(ray.direction, l);
+	c = dot_prod(l, l) - sphere.radius * sphere.radius;
+	if (solve_quadratic(new_abc(a, b, c), t0, t1) == 0)
+		return (0);
+	return (1);
 }
 
-void	sphere_intersect(t_ray ray, t_sphere *sphere, float *dist)
+int	sphere_intersect(t_ray ray, t_sphere sphere, double *dist)
 {
-	float		b;
-	float		c;
-	// float		root_1;
-	// float		root_2;
-	float		discr;
-	t_vector	l;
+	double	root_1;
+	double	root_2;
 
-	l = vec_substract(ray.origin, sphere->center);
-	b = 2 * vec_dot_product(ray.direction, l);
-	c = vec_dot_product(l, l) - sphere->radius * sphere->radius;
-	discr = b * b - 4 * c;
-	if (discr < 0)
+	if (get_roots(&root_1, &root_2, ray, sphere) == 0)
+		return (0);
+	if (root_1 < 0)
 	{
-		dist[0] = _INFINITY;
-		dist[1] = _INFINITY;
-		return ;
+		root_1 = root_2;
+		if (root_1 < 0)
+			return (0);
 	}
-	dist[0] = (b * (-1) - sqrt(discr)) / 2;
-	dist[1] = (b * (-1) + sqrt(discr)) / 2;
-	// *dist = min_f(root_1, root_2);
+	*dist = root_1;
+	return (1);
 }
