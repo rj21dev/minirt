@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_camera.c                                        :+:      :+:    :+:   */
+/*   clear_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:41:55 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/20 16:42:00 by rjada            ###   ########.fr       */
+/*   Created: 2022/06/22 15:14:09 by coverand          #+#    #+#             */
+/*   Updated: 2022/07/04 00:54:47 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_camera	*new_cam(t_vector *origin, t_vector *direction, float fov)
+void	ft_clear(t_scene **scene)
 {
-	t_camera	*cam;
-
-	cam = malloc(sizeof(t_camera));
-	if (!cam)
-		error_exit(-1);
-	cam->origin = origin;
-	cam->direction = direction;
-	cam->fov = fov;
-	return (cam);
+	if (*scene)
+	{
+		if ((*scene)->cams)
+			free((*scene)->cams);
+		if ((*scene)->ambient)
+			free((*scene)->ambient);
+		if ((*scene)->light)
+			free((*scene)->light);
+		if ((*scene)->elements)
+			ft_lstclear(&((*scene)->elements), free);
+		free(*scene);
+	}
 }

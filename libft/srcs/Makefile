@@ -33,10 +33,10 @@ $(NAME): $(OBJS) Makefile
 		$(LINK) $(NAME) $(OBJS)
 
 clean:
-		@$(RM)r $(OBJS_DIR)
+		$(RM)r $(OBJS_DIR)
 
 fclean: clean
-		@$(RM) $(NAME)
+		$(RM) $(NAME)
 
 re: fclean all
 

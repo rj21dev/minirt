@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:13:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/02/12 23:34:22 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/02 19:08:25 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_list	*ft_lstnew(void *content)
 	if (!lst)
 		return (NULL);
 	lst->content = content;
+	// lst->obj_id = obj_id;
 	lst->next = NULL;
 	return (lst);
 }

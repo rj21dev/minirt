@@ -6,7 +6,7 @@
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 23:54:20 by rjada             #+#    #+#             */
-/*   Updated: 2022/02/12 23:36:00 by rjada            ###   ########.fr       */
+/*   Updated: 2022/06/24 22:27:04 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ void	ft_split_free(char **split)
 	size_t	i;
 
 	i = 0;
-	while (split[i])
+	if (split)
 	{
-		free(split[i]);
-		++i;
+		while (split[i])
+		{
+			free(split[i]);
+			++i;
+		}
+		free(split);
+		split = NULL;
 	}
-	free(split);
 }

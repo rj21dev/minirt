@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_scene.c                                         :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:41:42 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 20:13:48 by rjada            ###   ########.fr       */
+/*   Created: 2022/06/21 22:58:25 by rjada             #+#    #+#             */
+/*   Updated: 2022/07/04 00:55:34 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_scene	*new_scene(t_camera *cam, t_list *objs)
+t_data	*init_data(void)
 {
-	t_scene	*scene;
+	t_data *data;
 
-	scene = malloc(sizeof(t_scene));
-	if (!scene)
-		error_exit(-1);
-	scene->cams = cam;
-	scene->objs = objs;
-	scene->width = 0;
-	scene->height = 0;
-	return (scene);
+	data = malloc(sizeof(t_data));
+	if (!data)
+		ft_errors_handler(strerror(errno));
+	data->mlx_ptr = mlx_init();
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Ray Tracer");
+	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->len, &data->endian);
+	return (data);
 }

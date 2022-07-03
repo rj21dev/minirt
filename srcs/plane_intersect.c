@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt_init_data.c                                     :+:      :+:    :+:   */
+/*   plane_intersect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 22:58:25 by rjada             #+#    #+#             */
-/*   Updated: 2022/06/21 22:58:56 by rjada            ###   ########.fr       */
+/*   Created: 2022/06/26 21:40:05 by coverand          #+#    #+#             */
+/*   Updated: 2022/07/04 00:56:13 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_data	*init_data(int width, int height)
+int	plane_intersect(t_ray ray, t_plane plane, double *dist)
 {
-	t_data *data;
+	t_v3	oc;
+	double	denom;
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, width, height, "Ray Tracer");
-	data->img = mlx_new_image(data->mlx_ptr, width, height);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->len, &data->endian);
-	data->width = width;
-	data->height = height;
-	return (data);
+	denom = dot_prod(plane.or_vec, ray.direction);
+	if (fabs(denom) > 1e-6)
+	{
+		oc = vec_sub(plane.point, ray.origin);
+		*dist = dot_prod(oc, plane.or_vec) / denom;
+		return (*dist >= 0);
+	}
+	return (0);
 }
