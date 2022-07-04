@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_ray.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 00:55:22 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 00:55:25 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 22:33:46 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ t_ray	ray_to_pixel(int x, int y, t_scene *scene)
 
 	c2w = look_at(scene->cams->origin, scene->cams->direction);
 	origin = multiply_by_matrix(new_v3(0, 0, 0), c2w);
+	origin = vec_add(origin, scene->shift);
 	direction = get_direction(x, y, scene);
 	direction = multiply_by_matrix(direction, c2w);
 	direction = vec_sub(direction, origin);

@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 21:00:47 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 22:34:58 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct s_scene
 	t_ambient	*ambient;
 	t_light		*light;
 	t_list		*elements;
+	t_v3		shift;
 }				t_scene;
 
 typedef struct s_data
