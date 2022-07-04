@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:13:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/02 19:08:25 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 15:44:06 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_list	*ft_lstnew(void *content)
 	if (!lst)
 		return (NULL);
 	lst->content = content;
-	// lst->obj_id = obj_id;
 	lst->next = NULL;
 	return (lst);
 }

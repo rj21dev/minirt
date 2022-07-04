@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:29:17 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 00:55:39 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 15:54:56 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	key_hook(int key, void *param)
 		ft_rotate_objects(data, key);
 	mlx_destroy_image(data->mlx_ptr, data->img);
 	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->len, &data->endian);
+	data->addr = mlx_get_data_addr(data->img, &data->bpp, \
+	&data->len, &data->endian);
 	render_scene(data);
 	return (0);
 }

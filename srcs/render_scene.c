@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 17:23:21 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 00:56:25 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 15:47:56 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	if (x > 0 && x < WIDTH && y > 0 && y < HEIGHT)
 	{
 		addr = data->addr + (y * data->len + x * (data->bpp / 8));
-		*(unsigned int*)addr = color;
+		*(unsigned int *)addr = color;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 00:50:55 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 15:47:34 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define Y_ROTATION_ANGLE	5
 # define Z_ROTATION_ANGLE	5
 
-typedef struct	s_v3
+typedef struct s_v3
 {
 	double	x;
 	double	y;
@@ -57,21 +57,21 @@ typedef struct	s_v3
 }				t_v3;
 
 /* Struct for (R, G, B) colors.*/
-typedef struct	s_color
+typedef struct s_color
 {
 	int	red;
 	int	green;
 	int	blue;
 }				t_color;
 
-typedef struct	s_color2
+typedef struct s_color2
 {
 	float	red;
 	float	green;
 	float	blue;
 }				t_color2;
 
-typedef union	u_int_color
+typedef union u_int_color
 {
 	int				integer;
 	unsigned char	comps[4];
@@ -80,7 +80,7 @@ typedef union	u_int_color
 /* Ambient lightning struct
 * lighting_ratio - ambient lighting ratio in range [0.0,1.0]
 */
-typedef struct	s_ambient
+typedef struct s_ambient
 {
 	float			lighting_ratio;
 	t_color2		color;
@@ -90,7 +90,7 @@ typedef struct	s_ambient
 * point - x,y,z coordinates of the light point;
 * brightness_ratio - the light brightness ratio in range [0.0,1.0].
 */
-typedef struct	s_light
+typedef struct s_light
 {
 	t_v3		point;
 	double		intensity;
@@ -102,7 +102,7 @@ typedef struct	s_light
 * direction - 3d normalized orientation vector;
 * fov -  Horizontal field of view in degrees in range [0,180].
 */
-typedef struct	s_camera
+typedef struct s_camera
 {
 	t_v3	origin;
 	t_v3	direction;
@@ -113,7 +113,7 @@ typedef struct	s_camera
 * center - x,y,z coordinates of the sphere center;
 * radius - the sphere radius.
 */
-typedef struct	s_sphere
+typedef struct s_sphere
 {
 	t_v3	center;
 	double	radius;
@@ -124,7 +124,7 @@ typedef struct	s_sphere
 * diameter - the cylinder diameter;
 ∗ height - the cylinder height.
 */
-typedef struct	s_cylinder
+typedef struct s_cylinder
 {
 	t_v3	point;
 	t_v3	or_vec;
@@ -132,20 +132,20 @@ typedef struct	s_cylinder
 	double	height;
 }				t_cylinder;
 
-typedef struct	s_plane
+typedef struct s_plane
 {
 	t_v3	point;
 	t_v3	or_vec;
 }				t_plane;
 
-typedef struct	s_object
+typedef struct s_object
 {
 	int			type;
 	void		*ptr;
 	t_color2	color;
 }				t_object;
 
-typedef struct	s_scene
+typedef struct s_scene
 {
 	t_camera	*cams;
 	int			width;
@@ -155,7 +155,7 @@ typedef struct	s_scene
 	t_list		*elements;
 }				t_scene;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -167,18 +167,18 @@ typedef struct	s_data
 	t_scene	*scene;
 }				t_data;
 
-typedef struct	s_matrix
+typedef struct s_matrix
 {
 	double	d[4][3];
 }				t_matrix;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	t_v3	origin;
 	t_v3	direction;
 }				t_ray;
 
-typedef struct	s_inter
+typedef struct s_inter
 {
 	t_v3		hit_p;
 	t_v3		hit_n;
@@ -186,7 +186,7 @@ typedef struct	s_inter
 	t_ray		ray;
 }				t_inter;
 
-typedef struct	s_abc
+typedef struct s_abc
 {
 	float	a;
 	float	b;
@@ -221,10 +221,12 @@ int			solve_quadratic(t_abc abc, double *x0, double *x1);
 int			cylinder_intersect(t_ray ray, t_cylinder cylinder, double *dist);
 int			sphere_intersect(t_ray ray, t_sphere sphere, double *dist);
 int			plane_intersect(t_ray ray, t_plane plane, double *dist);
-int			intersect_all(t_list *objects, t_ray ray, t_object **closest, double *d_min);
+int			intersect_all(t_list *objects, t_ray ray, \
+t_object **closest, double *d_min);
 
 t_v3		get_normal(t_v3 point, t_object *object);
-t_color2	calc_light(t_scene *scene, t_ray ray, t_object *closest, double d_min);
+t_color2	calc_light(t_scene *scene, t_ray ray, \
+t_object *closest, double d_min);
 void		render_scene(t_data *data);
 
 int			close_win(t_data *data);

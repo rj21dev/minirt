@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:01:31 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 00:55:13 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 15:47:09 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_color2	ft_get_color_struct(char *str)
 {
 	t_color2	color;
-	char	**tmp;
+	char		**tmp;
 
 	color.red = 0;
 	color.green = 0;
@@ -39,9 +39,12 @@ t_color2	ft_get_color_struct(char *str)
 t_v3	ft_get_coordiantes(char *str)
 {
 	char		**tmp;
-	t_v3	point;
+	t_v3		point;
 
 	tmp = ft_split(str, ',');
+	point.x = 0;
+	point.y = 0;
+	point.z = 0;
 	if (tmp[0] && tmp[1] && tmp[2] && !tmp[3])
 	{
 		point.x = ft_atof(tmp[0]);

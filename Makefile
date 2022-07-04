@@ -49,7 +49,7 @@ $(OBJS_DIR) :
 		mkdir -p $@
 
 $(NAME):  $(OBJS_DIR) $(OBJS) $(LIB_DIR)$(LIB) Makefile
-		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS_L) -o $@
+		$(CC) $(CFLAGS) $(OBJS) $(LFLAGS_M) -o $@
 
 $(LIB_DIR)$(LIB) : ;
 		@make --no-print-directory -C $(LIB_DIR)

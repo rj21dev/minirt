@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 13:25:27 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 00:55:20 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 15:45:47 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_get_sphere(char **elem, t_scene **scene)
 void	ft_get_cylinder(char **elem, t_scene **scene)
 {
 	t_cylinder	*cylinder;
-	t_object		*obj;
+	t_object	*obj;
 
 	cylinder = malloc(sizeof(t_cylinder));
 	if (!cylinder)

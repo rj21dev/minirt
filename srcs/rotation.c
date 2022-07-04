@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:27:59 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 00:56:31 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 16:17:57 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,28 @@ void	ft_z_rotation(t_v3 *point, float angle)
 
 void	ft_rotate_objects(t_data *data, int key)
 {
-	(void)data;
-	(void)key;
-	/*t_v3	point;
+	t_v3	*point;
+	t_list	*lst;
 
-	if (data->scene->elements && (data->scene->elements->obj_id == CYL || \
-	data->scene->elements->obj_id == PLANE))
+	typedef t_cylinder t_cyl;
+
+	lst = data->scene->elements;
+	while (lst)
 	{
-		if (data->scene->elements->obj_id == CYL)
-			point = ((t_cylinder *)(data->scene->elements->content))->or_vec;
-		if (data->scene->elements->obj_id == PLANE)
-			point = ((t_plane *)(data->scene->elements->content))->or_vec;
-		if (key == X_ROTATE_KEY)
-			ft_x_rotation(&point, X_ROTATION_ANGLE * M_PI / 180);
-		if (key == Y_ROTATE_KEY)
-			ft_y_rotation(&point, Y_ROTATION_ANGLE * M_PI / 180);
-		if (key == Z_ROTATE_KEY)
-			ft_z_rotation(&point, Z_ROTATION_ANGLE * M_PI / 180);
-	}*/
+		if (((t_object *)lst->content)->type == CYL || \
+		((t_object *)lst->content)->type == PLANE)
+		{
+			if (((t_object *)lst->content)->type == CYL)
+				point = &((t_cyl *)(((t_object *)lst->content)->ptr))->or_vec;
+			if (((t_object *)lst->content)->type == PLANE)
+				point = &((t_plane *)(((t_object *)lst->content)->ptr))->or_vec;
+			if (key == X_ROTATE_KEY)
+				ft_x_rotation(point, X_ROTATION_ANGLE * M_PI / 180);
+			if (key == Y_ROTATE_KEY)
+				ft_y_rotation(point, Y_ROTATION_ANGLE * M_PI / 180);
+			if (key == Z_ROTATE_KEY)
+				ft_z_rotation(point, Z_ROTATION_ANGLE * M_PI / 180);
+		}
+		lst = lst->next;
+	}
 }
