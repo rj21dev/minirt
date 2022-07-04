@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 00:56:10 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 21:00:59 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	ft_read_from_file(char *filename, t_scene **scene)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	if (!(*scene)->cams || !(*scene)->ambient || !(*scene)->light)
+		ft_errors_handler("Missing object (Camera/Ambient lightning/Light)");
 }
 
 t_scene	*ft_init(void)

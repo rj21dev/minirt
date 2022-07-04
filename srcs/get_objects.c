@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 13:25:27 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 15:45:47 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 21:16:12 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_get_sphere(char **elem, t_scene **scene)
 	if (!obj)
 		ft_errors_handler(strerror(errno));
 	sphere->center = ft_get_coordiantes(elem[1]);
+	ft_check_number_input(elem[2]);
 	sphere->radius = ft_atof(elem[2]) / 2;
 	obj->ptr = (void *)sphere;
 	obj->type = SPHERE;
@@ -46,6 +47,8 @@ void	ft_get_cylinder(char **elem, t_scene **scene)
 	cylinder->or_vec = ft_get_coordiantes(elem[2]);
 	if (ft_orientation_vector_check(cylinder->or_vec))
 		ft_errors_handler(ORIENTATION_VECTOR_ERR);
+	ft_check_number_input(elem[3]);
+	ft_check_number_input(elem[4]);
 	cylinder->radius = ft_atof(elem[3]) / 2;
 	cylinder->height = ft_atof(elem[4]);
 	obj->ptr = (void *)cylinder;

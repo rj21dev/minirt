@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:01:31 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 15:47:09 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 21:10:42 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_color2	ft_get_color_struct(char *str)
 	tmp = ft_split(str, ',');
 	if (tmp[0] && tmp[1] && tmp[2] && !tmp[3])
 	{
+		ft_check_number(tmp);
 		color.red = ft_atoi(tmp[0]) / 256.f;
 		color.green = ft_atoi(tmp[1]) / 256.f;
 		color.blue = ft_atoi(tmp[2]) / 256.f;
@@ -47,6 +48,7 @@ t_v3	ft_get_coordiantes(char *str)
 	point.z = 0;
 	if (tmp[0] && tmp[1] && tmp[2] && !tmp[3])
 	{
+		ft_check_number(tmp);
 		point.x = ft_atof(tmp[0]);
 		point.y = ft_atof(tmp[1]);
 		point.z = ft_atof(tmp[2]);

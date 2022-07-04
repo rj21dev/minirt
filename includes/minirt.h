@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 19:24:22 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 21:00:47 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,8 @@ int			close_win(t_data *data);
 int			ft_errors_handler(char *msg);
 float		ft_atof(char *str);
 int			ft_strcmp(char const *str1, char const *str2);
+void		ft_check_number_input(char *str);
+void		ft_check_number(char **str);
 
 t_color2	ft_get_color_struct(char *str);
 t_v3		ft_get_coordiantes(char *str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:03:59 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 00:55:59 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/04 21:18:51 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,40 @@ float	ft_atof(char *str)
 	if (str[i] && str[i++] == '.')
 		decimal = ft_get_decimal(&str[i]);
 	return (sign * (res + decimal));
+}
+
+void	ft_check_number_input(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (str[i] >= '0' && str[i] <= '9')
+	{
+		while (str[i] >= '0' && str[i] <= '9')
+			i++;
+		if (str[i] != '\0' && str[i] != '.' && str[i] != 10)
+			ft_errors_handler("Invalid number input");
+		i++;
+	}
+	else
+		ft_errors_handler("Invalid number input");
+	if (str[i] == '\0')
+		return ;
+	while (str[i] >= '0' && str[i] <= '9')
+		i++;
+	if (str[i] != '\0')
+		ft_errors_handler("Invalid number input");
+}
+
+void	ft_check_number(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		ft_check_number_input(str[i++]);
 }
