@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 15:47:34 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 17:28:38 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@
 # define X_ROTATION_ANGLE	5
 # define Y_ROTATION_ANGLE	5
 # define Z_ROTATION_ANGLE	5
+
+# define MOVE_CAMERA_DOWN_UP	5
+# define MOVE_CAMERA_R_L		5
 
 typedef struct s_v3
 {
@@ -260,5 +263,8 @@ int			ft_close(t_data *data);
 
 /* File rt_rotation.c */
 void		ft_rotate_objects(t_data *data, int key);
+void		ft_x_rotation(t_v3 *point, float angle);
+void		ft_y_rotation(t_v3 *point, float angle);
+void		ft_z_rotation(t_v3 *point, float angle);
 
 #endif
