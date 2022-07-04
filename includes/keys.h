@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:14:35 by coverand          #+#    #+#             */
-/*   Updated: 2022/06/30 15:33:22 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 18:11:21 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 // x, y, z buttons
 # define X_ROTATE_KEY	7
-# define Y_ROTATE_KEY	6
-# define Z_ROTATE_KEY	16
+# define Y_ROTATE_KEY	16
+# define Z_ROTATE_KEY	6
 
 # define KEY_ESC		53
 

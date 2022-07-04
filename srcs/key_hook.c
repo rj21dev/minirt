@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:29:17 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 17:32:42 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 17:41:45 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ void	ft_rotate_camera(t_data *data, int key)
 		ft_y_rotation(point, -MOVE_CAMERA_R_L * M_PI / 180);
 }
 
+void	ft_move_camera(t_data *data, int key)
+{
+
+	if (key == KEY_W)
+		data->scene->cams->direction.x += 0.5;
+	if (key == KEY_S)
+		data->scene->cams->direction.x -= 0.5;
+	if (key == KEY_A)
+		data->scene->cams->direction.y -= 0.5;
+	if (key == KEY_D)
+		data->scene->cams->direction.y += 0.5;
+}
+
 int	key_hook(int key, void *param)
 {
 	t_data	*data;
@@ -50,8 +63,10 @@ int	key_hook(int key, void *param)
 	if (key == X_ROTATE_KEY || key == Y_ROTATE_KEY || key == Z_ROTATE_KEY)
 		ft_rotate_objects(data, key);
 	if (key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT)
-	mlx_destroy_image(data->mlx_ptr, data->img);
 		ft_rotate_camera(data, key);
+	if (key == KEY_A || key == KEY_D || key == KEY_W || key == KEY_S)
+		ft_move_camera(data, key);
+	mlx_destroy_image(data->mlx_ptr, data->img);
 	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, \
 	&data->len, &data->endian);

@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 17:23:21 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 15:47:56 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 19:08:13 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,14 @@ static int	ray_trace(t_scene *scene, t_ray ray)
 	t_color2	amb_color;
 	t_color2	amb_apply;
 	t_color2	light_apply;
-	t_color2	result;
 
 	if (intersect_all(scene->elements, ray, &closest, &d_min))
 	{
-		amb_color = color2_coeff(scene->ambient->color, scene->ambient->lighting_ratio);
+		amb_color = color2_coeff(scene->ambient->color, \
+		scene->ambient->lighting_ratio);
 		amb_apply = color2_mult(closest->color, amb_color);
 		light_apply = calc_light(scene, ray, closest, d_min);
-		result = color2_add(amb_apply, light_apply);
-		return (to_int(result));
+		return (to_int(color2_add(amb_apply, light_apply)));
 	}
 	else
 		return (BACKGROUND_COLOR);

@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 17:28:38 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 18:07:32 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 # define X_ROTATION_ANGLE	5
 # define Y_ROTATION_ANGLE	5
-# define Z_ROTATION_ANGLE	5
+# define Z_ROTATION_ANGLE	90
 
 # define MOVE_CAMERA_DOWN_UP	5
 # define MOVE_CAMERA_R_L		5
