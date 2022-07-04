@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 18:07:32 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 19:24:22 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,5 +266,8 @@ void		ft_rotate_objects(t_data *data, int key);
 void		ft_x_rotation(t_v3 *point, float angle);
 void		ft_y_rotation(t_v3 *point, float angle);
 void		ft_z_rotation(t_v3 *point, float angle);
+
+t_color2	ft_find_color(t_light *light, t_inter inter, double coeff);
+t_color2	calc_specular(t_light *light, t_inter inter);
 
 #endif

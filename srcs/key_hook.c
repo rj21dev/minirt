@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:29:17 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 17:41:45 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 19:26:49 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_rotate_camera(t_data *data, int key)
 
 void	ft_move_camera(t_data *data, int key)
 {
-
 	if (key == KEY_W)
 		data->scene->cams->direction.x += 0.5;
 	if (key == KEY_S)

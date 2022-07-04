@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:27:59 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 16:17:57 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 19:26:40 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_rotate_objects(t_data *data, int key)
 	t_list	*lst;
 
 	typedef t_cylinder t_cyl;
-
 	lst = data->scene->elements;
 	while (lst)
 	{

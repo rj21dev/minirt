@@ -25,7 +25,8 @@ SRCS_F = main.c	\
 		shader.c \
 		clear_data.c \
 		rotation.c \
-		key_hook.c
+		key_hook.c \
+		utils.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
 OBJS_F		= $(patsubst %.c, %.o, $(SRCS_F))

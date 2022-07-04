@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/20 16:41:23 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 19:10:25 by coverand         ###   ########.fr       */
+/*   Created: 2022/07/04 19:22:25 by coverand          #+#    #+#             */
+/*   Updated: 2022/07/04 19:22:51 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-int	main(int argc, char **argv)
+t_color2	ft_find_color(t_light *light, t_inter inter, double coeff)
 {
-	t_data	*data;
-	t_scene	*scene;
+	t_color2	light_color;
+	t_color2	object_color;
+	t_color2	total;
 
-	if (argc != 2)
-		ft_errors_handler(ARGS_COUNT_FAILURE);
-	ft_check_extension(argv[1]);
-	scene = ft_init();
-	ft_read_from_file(argv[1], &scene);
-	data = init_data();
-	data->scene = scene;
-	render_scene(data);
-	mlx_key_hook(data->win_ptr, key_hook, (void *)data);
-	mlx_hook(data->win_ptr, 17, 0, ft_close, (void *)data);
-	mlx_loop(data->mlx_ptr);
-	return (0);
+	light_color = color2_coeff(light->color, light->intensity);
+	object_color = inter.closest->color;
+	total = color2_coeff(color2_mult(light_color, object_color), coeff);
+	if (coeff)
+		total = color2_add(total, calc_specular(light, inter));
+	return (total);
 }
