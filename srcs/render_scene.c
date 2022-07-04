@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 17:23:21 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 19:08:13 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 22:52:32 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	}
 }
 
-static int	intersect(t_ray ray, t_object *object, double *dist)
+int	intersect(t_ray ray, t_object *object, double *dist)
 {
 	if (object->type == SPHERE)
 		return (sphere_intersect(ray, *(t_sphere *)object->ptr, dist));

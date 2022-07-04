@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:14:35 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 18:11:21 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 22:54:23 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,8 @@
 # define KEY_LEFT		123
 # define KEY_RIGHT		124
 
+# define MOUSE_LEFT     1
+# define MOUSE_RIGHT    2
+# define MOUSE_UP       5
+# define MOUSE_DOWN     4
 #endif

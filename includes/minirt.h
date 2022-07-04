@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 22:34:58 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/04 23:22:33 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ typedef struct s_scene
 	t_light		*light;
 	t_list		*elements;
 	t_v3		shift;
+	t_object	*obj;
 }				t_scene;
 
 typedef struct s_data
@@ -262,7 +263,10 @@ void		ft_check_extension(char *file);
 
 /* File key_hook.c */
 int			key_hook(int key, void *param);
+int			mouse_hook(int keycode, int x, int y, t_data *data);
 int			ft_close(t_data *data);
+t_object	*intersect_all_return(t_list *objects, t_ray ray, \
+t_object **closest, double *d_min);
 
 /* File rt_rotation.c */
 void		ft_rotate_objects(t_data *data, int key);
@@ -272,5 +276,5 @@ void		ft_z_rotation(t_v3 *point, float angle);
 
 t_color2	ft_find_color(t_light *light, t_inter inter, double coeff);
 t_color2	calc_specular(t_light *light, t_inter inter);
-
+int	intersect(t_ray ray, t_object *object, double *dist);
 #endif
