@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:29:17 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 23:33:46 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 14:34:14 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	key_hook(int key, void *param)
 	t_data	*data;
 
 	data = param;
+	printf("key: %d\n", key);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	if (key == KEY_ESC)
 		ft_close(data);
@@ -65,6 +66,8 @@ int	key_hook(int key, void *param)
 		ft_rotate_camera(data, key);
 	if (key == KEY_A || key == KEY_D || key == KEY_W || key == KEY_S)
 		ft_move_camera(data, key);
+	if (key == KEY_H)
+		data->scene->cyl_height += 1;
 	mlx_destroy_image(data->mlx_ptr, data->img);
 	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, \
@@ -99,6 +102,19 @@ t_object **closest, double *d_min)
 	return (*closest);
 }
 
+void	ft_change_oblects_size(t_data *data, double change_size)
+{
+	if (data->scene->obj->type == SPHERE)
+		((t_sphere *)(data->scene->obj->ptr))->radius += change_size;
+	if (data->scene->obj->type == CYL)
+	{
+		if (data->scene->cyl_height % 2 == 0)
+			((t_cylinder *)(data->scene->obj->ptr))->radius += change_size;
+		else
+			((t_cylinder *)(data->scene->obj->ptr))->height += change_size;
+	}	
+}
+
 int	mouse_hook(int keycode, int __unused x, int __unused y, t_data __unused *data)
 {
 	t_object	*closest;
@@ -114,10 +130,8 @@ int	mouse_hook(int keycode, int __unused x, int __unused y, t_data __unused *dat
 		change_size += 0.5;
 	if (keycode == MOUSE_DOWN)
 		change_size -= 0.5;
-	if (data->scene->obj->type == SPHERE)
-		((t_sphere *)(data->scene->obj->ptr))->radius += change_size;
-	if (data->scene->obj->type == CYL)
-		((t_cylinder *)(data->scene->obj->ptr))->radius += change_size;
+	if (data->scene->obj)
+		ft_change_oblects_size(data, change_size);
 	mlx_destroy_image(data->mlx_ptr, data->img);
 	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, \
