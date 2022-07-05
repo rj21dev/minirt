@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:27:59 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 14:50:31 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:17:16 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_z_rotation(t_v3 *point, float angle)
 	point->y = tmp_x * sinf(angle) + point->y * cosf(angle);
 }
 
-void	ft_rotate_objects_help(t_v3 *point, int key, t_list *lst)
+void	ft_rotate_objects_help(t_v3 *point, int key, t_list *lst, double rot)
 {
 	typedef t_cylinder t_cyl;
 	if (lst)
@@ -53,11 +53,11 @@ void	ft_rotate_objects_help(t_v3 *point, int key, t_list *lst)
 			point = &((t_plane *)(((t_object *)lst->content)->ptr))->or_vec;
 	}
 	if (key == X_ROTATE_KEY)
-		ft_x_rotation(point, X_ROTATION_ANGLE * M_PI / 180);
+		ft_x_rotation(point, rot * X_ROTATION_ANGLE * M_PI / 180);
 	if (key == Y_ROTATE_KEY)
-		ft_y_rotation(point, Y_ROTATION_ANGLE * M_PI / 180);
+		ft_y_rotation(point, rot * Y_ROTATION_ANGLE * M_PI / 180);
 	if (key == Z_ROTATE_KEY)
-		ft_z_rotation(point, Z_ROTATION_ANGLE * M_PI / 180);
+		ft_z_rotation(point, rot * Z_ROTATION_ANGLE * M_PI / 180);
 }
 
 void	ft_rotate_objects(t_data *data, int key)
@@ -74,13 +74,13 @@ void	ft_rotate_objects(t_data *data, int key)
 			point = &((t_cyl *)(data->scene->obj->ptr))->or_vec;
 		if (data->scene->obj->type == PLANE)
 			point = &((t_plane *)(data->scene->obj->ptr))->or_vec;
-		ft_rotate_objects_help(point, key, NULL);
+		ft_rotate_objects_help(point, key, NULL, data->scene->rotation);
 		return ;
 	}
 	lst = data->scene->elements;
 	while (lst)
 	{
-		ft_rotate_objects_help(point, key, lst);
+		ft_rotate_objects_help(point, key, lst, data->scene->rotation);
 		lst = lst->next;
 	}
 }

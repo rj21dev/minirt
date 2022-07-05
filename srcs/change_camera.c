@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:27:24 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 17:52:37 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:18:46 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 void	ft_rotate_camera(t_data *data, int key)
 {
 	t_v3	*point;
+	double	rot;	
 
 	printf("Rotating camera...\n");
+	rot = data->scene->rotation;
 	point = &data->scene->cams->direction;
 	if (key == KEY_UP)
-		ft_x_rotation(point, MOVE_CAMERA_DOWN_UP * M_PI / 180);
+		ft_x_rotation(point, rot * MOVE_CAMERA_DOWN_UP * M_PI / 180);
 	if (key == KEY_DOWN)
-		ft_x_rotation(point, -MOVE_CAMERA_DOWN_UP * M_PI / 180);
+		ft_x_rotation(point, rot * -MOVE_CAMERA_DOWN_UP * M_PI / 180);
 	if (key == KEY_RIGHT)
-		ft_y_rotation(point, MOVE_CAMERA_R_L * M_PI / 180);
+		ft_y_rotation(point, rot * MOVE_CAMERA_R_L * M_PI / 180);
 	if (key == KEY_LEFT)
-		ft_y_rotation(point, -MOVE_CAMERA_R_L * M_PI / 180);
+		ft_y_rotation(point, rot * -MOVE_CAMERA_R_L * M_PI / 180);
 }
 
 void	ft_move_camera(t_data *data, int key)

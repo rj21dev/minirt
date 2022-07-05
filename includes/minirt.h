@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/05 18:14:38 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/05 19:12:24 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@
 
 # define MOVE_CAMERA_DOWN_UP	5
 # define MOVE_CAMERA_R_L		5
+
+# define MAX_RADIUS	1000000
+# define MIN_RADIUS	0.5
+# define MAX_HEIGHT	1000000
+# define MIN_HEIGHT	1
+
+# define CHANGE_SIZE	0.5
 
 typedef struct s_v3
 {
@@ -162,6 +169,7 @@ typedef struct s_scene
 	size_t		shift_object;
 	float		x;
 	float		y;
+	double		rotation;
 }				t_scene;
 
 typedef struct s_data

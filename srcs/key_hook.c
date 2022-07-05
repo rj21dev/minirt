@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
+/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:29:17 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 18:28:51 by rjada            ###   ########.fr       */
+/*   Updated: 2022/07/05 19:15:04 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	key_hook(int key, void *param)
 		ft_shift_object(data, key, data->scene->x, data->scene->y);
 	if (key == KEY_SPACE || key == KEY_BACK)
 		ft_change_light_ratio(data, key);
+	if (key == KEY_SHIFT)
+		data->scene->rotation *= -1;
 	ft_create_new_img(data);
 	return (0);
 }
@@ -101,10 +103,10 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 		data->scene->obj = intersect_all_return(data->scene->elements, \
 		ray_to_pixel(x, y, data->scene), &closest, &d_min);
 	if (keycode == MOUSE_UP)
-		change_size += 0.5;
+		change_size += CHANGE_SIZE;
 	if (keycode == MOUSE_DOWN)
-		change_size -= 0.5;
-	if (data->scene->obj)
+		change_size -= CHANGE_SIZE;
+	if (data->scene->obj && (keycode == MOUSE_DOWN || keycode == MOUSE_UP))
 		ft_change_objects_size(data, change_size);
 	ft_create_new_img(data);
 	return (0);

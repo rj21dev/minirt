@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:14:35 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 17:49:06 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 19:14:04 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@
 
 # define KEY_SPACE  49
 # define KEY_BACK   51
+
+# define KEY_SHIFT  258
 
 #endif
