@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/05 15:58:04 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:52:50 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,7 @@ t_color2	color2_coeff(t_color2 a, double coeff);
 
 t_data		*init_data(void);
 
+t_v3		get_direction(int x, int y, t_scene *scene);
 t_ray		create_ray(t_v3 origin, t_v3 direction);
 t_ray		ray_to_pixel(int x, int y, t_scene *scene);
 
@@ -237,6 +238,7 @@ t_v3		get_normal(t_v3 point, t_object *object);
 t_color2	calc_light(t_scene *scene, t_ray ray, \
 t_object *closest, double d_min);
 void		render_scene(t_data *data);
+int			intersect(t_ray ray, t_object *object, double *dist);
 
 int			close_win(t_data *data);
 
@@ -280,7 +282,14 @@ void		ft_z_rotation(t_v3 *point, float angle);
 
 t_color2	ft_find_color(t_light *light, t_inter inter, double coeff);
 t_color2	calc_specular(t_light *light, t_inter inter);
-int	intersect(t_ray ray, t_object *object, double *dist);
 
-t_v3	get_direction(int x, int y, t_scene *scene);
+/* change_camera.c */
+void		ft_rotate_camera(t_data *data, int key);
+void		ft_move_camera(t_data *data, int key);
+void		ft_change_light_ratio(t_data *data, int key);
+
+/* change_objects.c */
+void		ft_change_objects_size(t_data *data, double change_size);
+void		ft_shift_object(t_data *data, int key, int x, int y);
+
 #endif

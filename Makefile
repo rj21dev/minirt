@@ -26,7 +26,9 @@ SRCS_F = main.c	\
 		clear_data.c \
 		rotation.c \
 		key_hook.c \
-		utils.c
+		utils.c \
+		change_objects.c \
+		change_camera.c
 
 SRCS		= $(addprefix $(SRCS_DIR), $(SRCS_F))
 OBJS_F		= $(patsubst %.c, %.o, $(SRCS_F))

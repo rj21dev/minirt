@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:14:35 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 16:20:59 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:49:06 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define KEY_S			1
 # define KEY_A			0
 # define KEY_D			2
+# define KEY_R			15
+# define KEY_F			3
 
 # define KEY_UP			126
 # define KEY_DOWN		125
@@ -41,5 +43,8 @@
 # define KEY_H   4
 
 # define KEY_M   46
+
+# define KEY_SPACE  49
+# define KEY_BACK   51
 
 #endif
