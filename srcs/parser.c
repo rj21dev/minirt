@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:22:13 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 14:29:48 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:58:34 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,8 @@ t_scene	*ft_init(void)
 	scene->shift = new_v3(0, 0, 0);
 	scene->obj = NULL;
 	scene->cyl_height = 0;
+	scene->shift_object = 0;
+	scene->x = 0;
+	scene->y = 0;
 	return (scene);
 }

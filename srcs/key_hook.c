@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:29:17 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 14:34:14 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:21:55 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_close(t_data *data)
 void	ft_rotate_camera(t_data *data, int key)
 {
 	t_v3	*point;
-
+	
 	point = &data->scene->cams->direction;
 	if (key == KEY_UP)
 		ft_x_rotation(point, MOVE_CAMERA_DOWN_UP * M_PI / 180);
@@ -51,6 +51,40 @@ void	ft_move_camera(t_data *data, int key)
 		data->scene->shift.x += 0.5;
 }
 
+void	ft_shift_object(t_data *data, int key, int x, int y)
+{
+	t_v3	*point;
+	t_v3	direction;
+
+	direction = get_direction(x, y, data->scene);
+	if (data->scene->obj->type == SPHERE)
+		point = & ((t_sphere *)(data->scene->obj->ptr))->center;
+	if (data->scene->obj->type == CYL)
+		point = & ((t_cylinder *)(data->scene->obj->ptr))->point;
+	if (data->scene->obj->type == PLANE)
+		point = & ((t_plane *)(data->scene->obj->ptr))->point;
+	if (key == KEY_PLUS)
+	{
+		point->x += 2 * direction.x;
+		point->y += 2 * direction.y;
+		point->z += 2 * direction.z;
+	}
+	if (key == KEY_MINUS)
+	{
+		point->x += -2 * direction.x;
+		point->y += -2 * direction.y;
+		point->z += -2 * direction.z;
+	}
+	if (key == KEY_UP)
+		point->y += 0.5;
+	if (key == KEY_DOWN)
+		point->y -= 0.5;
+	if (key == KEY_RIGHT)
+		point->x += 0.5;
+	if (key == KEY_LEFT)
+		point->x -= 0.5;
+}
+
 int	key_hook(int key, void *param)
 {
 	t_data	*data;
@@ -62,12 +96,16 @@ int	key_hook(int key, void *param)
 		ft_close(data);
 	if (key == X_ROTATE_KEY || key == Y_ROTATE_KEY || key == Z_ROTATE_KEY)
 		ft_rotate_objects(data, key);
-	if (key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT)
+	if ((key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT) && data->scene->shift_object % 2 == 0)
 		ft_rotate_camera(data, key);
 	if (key == KEY_A || key == KEY_D || key == KEY_W || key == KEY_S)
 		ft_move_camera(data, key);
 	if (key == KEY_H)
 		data->scene->cyl_height += 1;
+	if (key == KEY_M)
+		data->scene->shift_object += 1;
+	if (data->scene->obj && data->scene->shift_object % 2 != 0)
+		ft_shift_object(data, key, data->scene->x, data->scene->y);
 	mlx_destroy_image(data->mlx_ptr, data->img);
 	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, \
@@ -122,6 +160,8 @@ int	mouse_hook(int keycode, int __unused x, int __unused y, t_data __unused *dat
 	double		change_size;
 
 	change_size = 0;
+	data->scene->x = x;
+	data->scene->y = y;
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	if (keycode == MOUSE_LEFT)
 		data->scene->obj = intersect_all_return(data->scene->elements, \

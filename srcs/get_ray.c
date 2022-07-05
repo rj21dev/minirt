@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 00:55:22 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/04 22:33:46 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:06:35 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_matrix	look_at(t_v3 origin, t_v3 cam_vector)
 	return (m);
 }
 
-static t_v3	get_direction(int x, int y, t_scene *scene)
+t_v3	get_direction(int x, int y, t_scene *scene)
 {
 	double	fov_coeff;
 	double	aspect_ratio;
@@ -81,10 +81,10 @@ t_ray	ray_to_pixel(int x, int y, t_scene *scene)
 
 	c2w = look_at(scene->cams->origin, scene->cams->direction);
 	origin = multiply_by_matrix(new_v3(0, 0, 0), c2w);
-	origin = vec_add(origin, scene->shift);
 	direction = get_direction(x, y, scene);
 	direction = multiply_by_matrix(direction, c2w);
 	direction = vec_sub(direction, origin);
+	origin = vec_add(origin, scene->shift);
 	vec_norm(&direction);
 	return (create_ray(origin, direction));
 }

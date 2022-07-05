@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:14:35 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 14:35:24 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 16:20:59 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 # define MOUSE_DOWN     4
 
 # define KEY_MINUS  27
-# define KEY_PLUS   26
+# define KEY_PLUS   24
 
 # define KEY_H   4
 
-# define KEY_M   26
+# define KEY_M   46
 
 #endif

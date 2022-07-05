@@ -6,7 +6,7 @@
 /*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/05 14:30:00 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:58:04 by coverand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,9 @@ typedef struct s_scene
 	t_v3		shift;
 	t_object	*obj;
 	size_t		cyl_height;
+	size_t		shift_object;
+	float		x;
+	float		y;
 }				t_scene;
 
 typedef struct s_data
@@ -278,4 +281,6 @@ void		ft_z_rotation(t_v3 *point, float angle);
 t_color2	ft_find_color(t_light *light, t_inter inter, double coeff);
 t_color2	calc_specular(t_light *light, t_inter inter);
 int	intersect(t_ray ray, t_object *object, double *dist);
+
+t_v3	get_direction(int x, int y, t_scene *scene);
 #endif
