@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/05 17:52:50 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/05 18:14:38 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include "errors.h"
 # include "keys.h"
 
-# define WIDTH 1024
-# define HEIGHT 768
+# define WIDTH 800
+# define HEIGHT 600
 
 # define BACKGROUND_COLOR 0x000000
 # define METALNESS 0.1
@@ -45,9 +45,9 @@
 # define PLANE	2
 # define CYL	3
 
-# define X_ROTATION_ANGLE	5
-# define Y_ROTATION_ANGLE	5
-# define Z_ROTATION_ANGLE	90
+# define X_ROTATION_ANGLE	10
+# define Y_ROTATION_ANGLE	10
+# define Z_ROTATION_ANGLE	10
 
 # define MOVE_CAMERA_DOWN_UP	5
 # define MOVE_CAMERA_R_L		5
