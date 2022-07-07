@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:29:17 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 19:15:04 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/07 19:41:44 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	ft_create_new_img(t_data *data)
 {
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img);
-	data->img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, \
-	&data->len, &data->endian);
 	render_scene(data);
 }
 
@@ -56,9 +51,9 @@ int	key_hook(int key, void *param)
 		data->scene->shift_object += 1;
 	if (data->scene->obj && data->scene->shift_object % 2 != 0)
 		ft_shift_object(data, key, data->scene->x, data->scene->y);
-	if (key == KEY_SPACE || key == KEY_BACK)
+	if (key == KEY_PLUS || key == KEY_MINUS)
 		ft_change_light_ratio(data, key);
-	if (key == KEY_SHIFT)
+	if (key == KEY_SHIFT_L)
 		data->scene->rotation *= -1;
 	ft_create_new_img(data);
 	return (0);

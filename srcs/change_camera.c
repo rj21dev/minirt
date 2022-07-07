@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:27:24 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 19:18:46 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/07 19:16:53 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	ft_move_camera(t_data *data, int key)
 void	ft_change_light_ratio(t_data *data, int key)
 {
 	printf("Changing light intensity...\n");
-	if (key == KEY_SPACE)
+	if (key == KEY_PLUS)
 		data->scene->light->intensity += 0.05;
-	if (key == KEY_BACK)
+	if (key == KEY_MINUS)
 		data->scene->light->intensity -= 0.05;
 	if (data->scene->light->intensity > 1)
 		data->scene->light->intensity = 1;

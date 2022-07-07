@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:42:04 by rjada             #+#    #+#             */
-/*   Updated: 2022/07/05 19:12:24 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/07 19:24:02 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@
 # define MOVE_CAMERA_R_L		5
 
 # define MAX_RADIUS	1000000
-# define MIN_RADIUS	0.5
+# define MIN_RADIUS	0.05
 # define MAX_HEIGHT	1000000
-# define MIN_HEIGHT	1
+# define MIN_HEIGHT	0.1
 
 # define CHANGE_SIZE	0.5
 

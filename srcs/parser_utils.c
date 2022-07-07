@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:03:59 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/04 21:18:51 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/07 19:40:45 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ void	ft_check_number_input(char *str)
 		return ;
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
-	if (str[i] != '\0')
-		ft_errors_handler("Invalid number input");
 }
 
 void	ft_check_number(char **str)

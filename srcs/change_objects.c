@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_objects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coverand <coverand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rjada <rjada@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:29:27 by coverand          #+#    #+#             */
-/*   Updated: 2022/07/05 19:20:16 by coverand         ###   ########.fr       */
+/*   Updated: 2022/07/07 19:47:19 by rjada            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ void	ft_shift_object(t_data *data, int key, int x, int y)
 		point = & ((t_cylinder *)(data->scene->obj->ptr))->point;
 	if (data->scene->obj->type == PLANE)
 		point = & ((t_plane *)(data->scene->obj->ptr))->point;
-	if (key == KEY_PLUS)
-		point = add_vectors_modified(point, vec_mult(direction, 2));
-	if (key == KEY_MINUS)
-		point = add_vectors_modified(point, vec_mult(direction, -2));
-	if (key == KEY_UP)
+	if (key == KEY_R)
+		point = add_vectors_modified(point, vec_mult(direction, 1.1));
+	if (key == KEY_F)
+		point = add_vectors_modified(point, vec_mult(direction, -1.1));
+	if (key == KEY_W)
 		point->y += 0.5;
-	if (key == KEY_DOWN)
+	if (key == KEY_S)
 		point->y -= 0.5;
-	if (key == KEY_RIGHT)
+	if (key == KEY_D)
 		point->x += 0.5;
-	if (key == KEY_LEFT)
+	if (key == KEY_A)
 		point->x -= 0.5;
 }
 
